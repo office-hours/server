@@ -27,8 +27,8 @@ public class Student {
   @OneToOne(
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }
       )
-  @JoinColumn(name = )
-  @Column(nullable = false, updatable = false)
+  @JoinColumn(name = "user_reference", referencedColumnName = "user_id")
+  @Column(name = "user_reference", nullable = false, updatable = false)
   private User user_id;
 
   @NonNull

@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
@@ -25,7 +26,8 @@ public class Teacher {
   @OneToOne(
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }
   )
-  @Column(nullable = false, updatable = false)
+  @JoinColumn(name = "user_ref", referencedColumnName = "user_id")
+  @Column(name = "user_ref", nullable = false, updatable = false)
   private User user_id;
 
   @NonNull
