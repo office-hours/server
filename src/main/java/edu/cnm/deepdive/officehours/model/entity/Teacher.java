@@ -28,4 +28,13 @@ public class Teacher {
   @Column(nullable = false, updatable = false)
   private User user_id;
 
+  @NonNull
+  public UUID getId() {
+    return id;
+  }
+
+  @NonNull
+  public User getUser_id() {
+    return user_id;
+  }
 }
