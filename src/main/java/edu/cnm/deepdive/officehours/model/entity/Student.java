@@ -4,6 +4,7 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -24,11 +25,10 @@ public class Student {
   private UUID id;
 
   @NonNull
-  @OneToOne(
+  @OneToOne( fetch = FetchType.LAZY,
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }
       )
-  @JoinColumn(name = "user_reference", referencedColumnName = "user_id")
-  @Column(name = "user_reference", nullable = false, updatable = false)
+  @JoinColumn(name = "user_id")
   private User user_id;
 
   @NonNull
