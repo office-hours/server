@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
 import java.util.Date;
+import java.util.LinkedHashSet;
 import java.util.Set;
 import java.util.UUID;
 import javax.persistence.CascadeType;
@@ -8,8 +9,10 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
@@ -18,6 +21,14 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.NonNull;
 
 @Entity
+@Table(
+    indexes = {
+        @Index(columnList = "status"),
+        @Index(columnList = "startTime"),
+        @Index(columnList = "endTime"),
+        @Index(columnList = "created")
+    }
+)
 public class Appointment {
 
   @NonNull
@@ -29,14 +40,17 @@ public class Appointment {
   private UUID id;
 
 
-//  @NonNull
-//  @OneToOne ( cascade = {CascadeType.DETACH, CascadeType.MERGE,
-//      CascadeType.PERSIST, CascadeType.REFRESH})
-//  @JoinColumn(name = "student_id")
-//  private Set<Student> studentId;
+  @NonNull
+  @OneToOne ( cascade = {CascadeType.DETACH, CascadeType.MERGE,
+      CascadeType.PERSIST, CascadeType.REFRESH})
+  @JoinColumn(name = "student_id")
+  private Student student;
 
   @NonNull
-  private UUID teacherId;
+  @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+      CascadeType.PERSIST, CascadeType.REFRESH} )
+  @JoinColumn(name = "teacher_id")
+  private Teacher teacher;
 
 
   @NonNull
@@ -44,11 +58,10 @@ public class Appointment {
   private String status;
 
   @NonNull
-
-  private Date start;
+  private Date startTime;
 
   @NonNull
-  private Date end;
+  private Date endTime;
 
   @NonNull
   @CreationTimestamp
@@ -69,22 +82,12 @@ public class Appointment {
 
   @NonNull
   public Date getEnd() {
-    return end;
+    return endTime;
   }
 
   @NonNull
   public UUID getId() {
     return id;
-  }
-
-  @NonNull
-  public UUID getStudentId() {
-    return studentId;
-  }
-
-  @NonNull
-  public UUID getTeacherId() {
-    return teacherId;
   }
 
   @NonNull
@@ -94,7 +97,7 @@ public class Appointment {
 
   @NonNull
   public Date getStart() {
-    return start;
+    return startTime;
   }
 
   @NonNull
@@ -105,5 +108,33 @@ public class Appointment {
   @NonNull
   public Date getUpdated() {
     return updated;
+  }
+
+  @NonNull
+  public Student getStudent() {
+    return student;
+  }
+
+  @NonNull
+  public Teacher getTeacher() {
+    return teacher;
+  }
+
+  @NonNull
+  public Date getStartTime() {
+    return startTime;
+  }
+
+  public void setStartTime(@NonNull Date startTime) {
+    this.startTime = startTime;
+  }
+
+  @NonNull
+  public Date getEndTime() {
+    return endTime;
+  }
+
+  public void setEndTime(@NonNull Date endTime) {
+    this.endTime = endTime;
   }
 }

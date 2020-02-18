@@ -30,6 +30,11 @@ public class Teacher {
   private User user_id;
 
   @NonNull
+  @OneToOne (mappedBy = "teacher",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  private Appointment appointment;
+
+  @NonNull
   public UUID getId() {
     return id;
   }
@@ -37,5 +42,14 @@ public class Teacher {
   @NonNull
   public User getUser_id() {
     return user_id;
+  }
+
+  @NonNull
+  public Appointment getAppointment() {
+    return appointment;
+  }
+
+  public void setAppointment(@NonNull Appointment appointment) {
+    this.appointment = appointment;
   }
 }

@@ -4,8 +4,6 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.ForeignKey;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -30,6 +28,20 @@ public class Student {
       )
   @JoinColumn(name = "user_id")
   private User user_id;
+
+  @NonNull
+  @OneToOne (mappedBy = "student",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  private Appointment appointment;
+
+  @NonNull
+  public Appointment getAppointment() {
+    return appointment;
+  }
+
+  public void setAppointment(@NonNull Appointment appointment) {
+    this.appointment = appointment;
+  }
 
   @NonNull
   public UUID getId() {
