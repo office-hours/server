@@ -32,7 +32,7 @@ public class Appointment {
 //  @NonNull
 //  @OneToOne ( cascade = {CascadeType.DETACH, CascadeType.MERGE,
 //      CascadeType.PERSIST, CascadeType.REFRESH})
-//  @JoinColumn(name = "student_id", referencedColumnName = ap)
+//  @JoinColumn(name = "student_id")
 //  private Set<Student> studentId;
 
   @NonNull

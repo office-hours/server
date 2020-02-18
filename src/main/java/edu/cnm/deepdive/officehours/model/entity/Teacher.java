@@ -24,7 +24,7 @@ public class Teacher {
   private UUID id;
 
   @NonNull
-  @OneToOne(fetch = FetchType.LAZY,
+  @OneToOne(
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
   @JoinColumn(name = "user_id")
   private User user_id;
