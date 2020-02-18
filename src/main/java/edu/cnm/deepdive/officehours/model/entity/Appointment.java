@@ -9,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -38,7 +39,7 @@ public class Appointment {
   private UUID id;
 
   @NonNull
-  @OneToOne (
+  @ManyToOne(
       cascade = {
           CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
       })
@@ -46,7 +47,7 @@ public class Appointment {
   private Student student;
 
   @NonNull
-  @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+  @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
       CascadeType.PERSIST, CascadeType.REFRESH} )
   @JoinColumn(name = "teacher_id")
   private Teacher teacher;

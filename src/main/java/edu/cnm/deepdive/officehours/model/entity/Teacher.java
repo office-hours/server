@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import java.util.LinkedList;
+import java.util.List;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -7,6 +9,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
@@ -31,11 +34,11 @@ public class Teacher {
   private User user;
 
   @NonNull
-  @OneToOne (mappedBy = "teacher",
+  @OneToMany(mappedBy = "teacher",
       cascade = {
       CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
   })
-  private Appointment appointment;
+  private List<Appointment> appointment = new LinkedList<>();
 
   @NonNull
   public UUID getId() {
@@ -48,11 +51,12 @@ public class Teacher {
   }
 
   @NonNull
-  public Appointment getAppointment() {
+  public List<Appointment> getAppointment() {
     return appointment;
   }
 
-  public void setAppointment(@NonNull Appointment appointment) {
+  public void setAppointment(
+      @NonNull List<Appointment> appointment) {
     this.appointment = appointment;
   }
 
