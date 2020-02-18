@@ -1,8 +1,6 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -39,10 +37,11 @@ public class Appointment {
         nullable = false, updatable = false)
   private UUID id;
 
-
   @NonNull
-  @OneToOne ( cascade = {CascadeType.DETACH, CascadeType.MERGE,
-      CascadeType.PERSIST, CascadeType.REFRESH})
+  @OneToOne (
+      cascade = {
+          CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+      })
   @JoinColumn(name = "student_id")
   private Student student;
 
@@ -51,7 +50,6 @@ public class Appointment {
       CascadeType.PERSIST, CascadeType.REFRESH} )
   @JoinColumn(name = "teacher_id")
   private Teacher teacher;
-
 
   @NonNull
   @Column(nullable = false)
@@ -77,11 +75,6 @@ public class Appointment {
   @Column(nullable = false)
   private Date updated;
 
-
-  public void setStatus(@NonNull String status) {
-    this.status = status;
-  }
-
   @NonNull
   public Date getEnd() {
     return endTime;
@@ -95,6 +88,10 @@ public class Appointment {
   @NonNull
   public String getStatus() {
     return status;
+  }
+
+  public void setStatus(@NonNull String status) {
+    this.status = status;
   }
 
   @NonNull
@@ -139,4 +136,5 @@ public class Appointment {
   public void setEndTime(@NonNull Date endTime) {
     this.endTime = endTime;
   }
+
 }

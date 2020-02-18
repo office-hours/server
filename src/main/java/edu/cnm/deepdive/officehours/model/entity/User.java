@@ -2,10 +2,12 @@ package edu.cnm.deepdive.officehours.model.entity;
 
 import java.util.Date;
 import java.util.UUID;
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
@@ -38,6 +40,14 @@ public class User {
   @Temporal(TemporalType.TIMESTAMP)
   @Column(nullable = false, updatable = false)
   private Date created;
+
+  @OneToOne(mappedBy = "user",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  private Teacher teacher;
+
+  @OneToOne (mappedBy = "user",
+      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  private Student student;
 
   @NonNull
   public UUID getId() {
@@ -73,5 +83,13 @@ public class User {
   @NonNull
   public Date getCreated() {
     return created;
+  }
+
+  public Teacher getTeacher() {
+    return teacher;
+  }
+
+  public Student getStudent() {
+    return student;
   }
 }

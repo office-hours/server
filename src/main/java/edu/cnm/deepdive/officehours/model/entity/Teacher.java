@@ -4,7 +4,6 @@ import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -25,13 +24,17 @@ public class Teacher {
 
   @NonNull
   @OneToOne(
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+      cascade = {CascadeType.DETACH, CascadeType.MERGE,
+          CascadeType.PERSIST, CascadeType.REFRESH }
+      )
   @JoinColumn(name = "user_id")
-  private User user_id;
+  private User user;
 
   @NonNull
   @OneToOne (mappedBy = "teacher",
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+      cascade = {
+      CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+  })
   private Appointment appointment;
 
   @NonNull
@@ -40,8 +43,8 @@ public class Teacher {
   }
 
   @NonNull
-  public User getUser_id() {
-    return user_id;
+  public User getUser() {
+    return user;
   }
 
   @NonNull
@@ -51,5 +54,9 @@ public class Teacher {
 
   public void setAppointment(@NonNull Appointment appointment) {
     this.appointment = appointment;
+  }
+
+  public void setUser(@NonNull User user) {
+    this.user = user;
   }
 }

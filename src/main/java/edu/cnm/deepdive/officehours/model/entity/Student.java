@@ -24,10 +24,11 @@ public class Student {
 
   @NonNull
   @OneToOne(
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH }
-      )
+      cascade = {
+          CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+      })
   @JoinColumn(name = "user_id")
-  private User user_id;
+  private User user;
 
   @NonNull
   @OneToOne (mappedBy = "student",
@@ -49,7 +50,11 @@ public class Student {
   }
 
   @NonNull
-  public User getUser_id() {
-    return user_id;
+  public User getUser() {
+    return user;
+  }
+
+  public void setUser(@NonNull User user) {
+    this.user = user;
   }
 }
