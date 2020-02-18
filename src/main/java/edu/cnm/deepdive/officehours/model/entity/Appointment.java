@@ -58,9 +58,11 @@ public class Appointment {
   private String status;
 
   @NonNull
+  @Column(nullable = false)
   private Date startTime;
 
   @NonNull
+  @Column(nullable = false)
   private Date endTime;
 
   @NonNull

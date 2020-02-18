@@ -1,10 +1,14 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import java.util.Date;
 import java.util.UUID;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
@@ -30,6 +34,12 @@ public class User {
   private String email;
 
   @NonNull
+  @CreationTimestamp
+  @Temporal(TemporalType.TIMESTAMP)
+  @Column(nullable = false, updatable = false)
+  private Date created;
+
+  @NonNull
   public UUID getId() {
     return id;
   }
@@ -39,8 +49,16 @@ public class User {
     return oauth;
   }
 
+  public void setOauth(@NonNull String oauth) {
+    this.oauth = oauth;
+  }
+
   public String getNickname() {
     return nickname;
+  }
+
+  public void setNickname(String nickname) {
+    this.nickname = nickname;
   }
 
   @NonNull
@@ -48,15 +66,12 @@ public class User {
     return email;
   }
 
-  public void setOauth(@NonNull String oauth) {
-    this.oauth = oauth;
-  }
-
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
-
   public void setEmail(@NonNull String email) {
     this.email = email;
+  }
+
+  @NonNull
+  public Date getCreated() {
+    return created;
   }
 }
