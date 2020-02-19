@@ -7,7 +7,9 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.Index;
 import javax.persistence.OneToOne;
+import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
@@ -15,6 +17,11 @@ import org.hibernate.annotations.GenericGenerator;
 import org.springframework.lang.NonNull;
 
 @Entity
+@Table(
+    indexes = {
+        @Index(columnList = "created")
+    }
+)
 public class User {
 
   @NonNull
@@ -29,6 +36,7 @@ public class User {
   @Column(length = 4696, nullable = false, unique = true)
   private String oauth;
 
+  @Column(unique = true)
   private String nickname;
 
   @NonNull
