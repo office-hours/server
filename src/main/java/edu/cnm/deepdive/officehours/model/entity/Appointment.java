@@ -23,8 +23,8 @@ import org.springframework.lang.NonNull;
 @Table(
     indexes = {
         @Index(columnList = "status"),
-        @Index(columnList = "startTime"),
-        @Index(columnList = "endTime"),
+        @Index(columnList = "start_time"),
+        @Index(columnList = "end_time"),
         @Index(columnList = "created")
     }
 )
@@ -57,11 +57,11 @@ public class Appointment {
   private String status;
 
   @NonNull
-  @Column(nullable = false)
+  @Column(name = "start_time", nullable = false)
   private Date startTime;
 
   @NonNull
-  @Column(nullable = false)
+  @Column(name = "end_time", nullable = false)
   private Date endTime;
 
   @NonNull
