@@ -5,13 +5,13 @@ import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-  public interface UserRepository extends JpaRepository<User, UUID> {
+public interface UserRepository extends JpaRepository<User, UUID> {
 
-    Iterable<User> findAllByOrderById();
+  Iterable<User> findAllByOrderById();
 
-    Iterable<User> getAllByIdContainsOrderByIdAsc(String fragment);
+  Iterable<User> getAllByIdContainsOrderByIdAsc(String fragment);
 
-    default User findOrFail(UUID id) {
-      return findById(id).get();
-    }
+  default User findOrFail(UUID id) {
+    return findById(id).get();
+  }
 }
