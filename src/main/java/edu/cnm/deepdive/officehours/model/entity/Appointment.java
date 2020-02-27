@@ -1,8 +1,6 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
 import java.util.Date;
-import java.util.LinkedHashSet;
-import java.util.Set;
 import java.util.UUID;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -11,6 +9,7 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
 import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
@@ -39,28 +38,30 @@ public class Appointment {
         nullable = false, updatable = false)
   private UUID id;
 
-
   @NonNull
-  @OneToOne ( cascade = {CascadeType.DETACH, CascadeType.MERGE,
-      CascadeType.PERSIST, CascadeType.REFRESH})
+  @ManyToOne(
+      cascade = {
+          CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+      })
   @JoinColumn(name = "student_id")
   private Student student;
 
   @NonNull
-  @OneToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
+  @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
       CascadeType.PERSIST, CascadeType.REFRESH} )
   @JoinColumn(name = "teacher_id")
   private Teacher teacher;
-
 
   @NonNull
   @Column(nullable = false)
   private String status;
 
   @NonNull
+  @Column(nullable = false)
   private Date startTime;
 
   @NonNull
+  @Column(nullable = false)
   private Date endTime;
 
   @NonNull
@@ -75,11 +76,6 @@ public class Appointment {
   @Column(nullable = false)
   private Date updated;
 
-
-  public void setStatus(@NonNull String status) {
-    this.status = status;
-  }
-
   @NonNull
   public Date getEnd() {
     return endTime;
@@ -93,6 +89,10 @@ public class Appointment {
   @NonNull
   public String getStatus() {
     return status;
+  }
+
+  public void setStatus(@NonNull String status) {
+    this.status = status;
   }
 
   @NonNull
@@ -137,4 +137,5 @@ public class Appointment {
   public void setEndTime(@NonNull Date endTime) {
     this.endTime = endTime;
   }
+
 }
