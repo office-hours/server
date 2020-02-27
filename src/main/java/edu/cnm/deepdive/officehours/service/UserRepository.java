@@ -1,5 +1,13 @@
 package edu.cnm.deepdive.officehours.service;
 
-public interface UserRepository {
+import edu.cnm.deepdive.officehours.model.entity.User;
+import java.util.UUID;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface UserRepository extends JpaRepository<User, UUID> {
+
+  Iterable<User> getAllByIdOrderByCreatedDesc();
+
+  Iterable<User> getAllByNicknameOrderByNicknameDesc();
 
 }
