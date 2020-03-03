@@ -1,7 +1,10 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import edu.cnm.deepdive.officehours.view.FlatUser;
+import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
+import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -14,15 +17,22 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(
     indexes = {
         @Index(columnList = "created")
     }
 )
-public class User {
+public class User implements FlatUser {
+
+  private static EntityLinks entityLinks;
+
 
   @NonNull
   @Id
@@ -99,5 +109,19 @@ public class User {
 
   public Student getStudent() {
     return student;
+  }
+
+  public URI getHref() {
+    return entityLinks.linkForItemResource(Teacher.class, id).toUri();
+  }
+
+  @PostConstruct
+  private void init() {
+    entityLinks.toString();
+  }
+
+  @Autowired
+  private void setEntityLinks(EntityLinks entityLinks) {
+    User.entityLinks = entityLinks;
   }
 }

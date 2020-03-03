@@ -1,7 +1,9 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
+import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -60,19 +62,19 @@ public class TeacherController {
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable UUID id) {
-    teacherRepository.findById(id).ifPresent((source) -> {
-      Set<Teacher> teachers = source.
-      .forEach((teacher) -> teacher (null));
-      quotes.clear();
-      teacherRepository.delete(source);
+    teacherRepository.findById(id).ifPresent((teacher) -> {
+      List<Appointment> appointments = teacher.getAppointment();
+      appointments.forEach((appointment) -> appointment.setStatus("Cancelled"));
+      appointments.clear();
+      teacherRepository.delete(teacher);
     });
   }
 
   @PutMapping(value = "/{id}",
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public Teacher put(@PathVariable UUID id, @RequestBody Teacher updated) {
-    Teacher source = get(id);
-    teacher.setTeacherName(updated.getTeacherName());
-    return Teacher.save(teacher);
+    Teacher teacher = get(id);
+    teacher.setAppointment(updated.getAppointment());
+    return teacherRepository.save(teacher);
   }
 }
