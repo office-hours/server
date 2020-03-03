@@ -26,8 +26,9 @@ import org.springframework.web.bind.annotation.RestController;
 @ExposesResourceFor(User.class)
 public class UserController {
 
-  private final UserRepository repository;
-  private final TeacherRepository
+  private final UserRepository userRepository;
+  private final TeacherRepository teacherRepository;
+  private final StudentController studentController;
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
