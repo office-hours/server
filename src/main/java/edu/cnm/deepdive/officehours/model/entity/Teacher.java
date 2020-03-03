@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -63,4 +64,5 @@ public class Teacher {
   public void setUser(@NonNull User user) {
     this.user = user;
   }
+
 }
