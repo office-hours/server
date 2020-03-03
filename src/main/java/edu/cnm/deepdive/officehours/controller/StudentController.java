@@ -1,8 +1,7 @@
-package edu.cnm.deepdive.officehours.controller.rest;
+package edu.cnm.deepdive.officehours.controller;
 
+import edu.cnm.deepdive.officehours.model.entity.Student;
 import edu.cnm.deepdive.officehours.model.entity.User;
-import edu.cnm.deepdive.officehours.service.TeacherRepository;
-import edu.cnm.deepdive.officehours.service.UserRepository;
 import java.util.Set;
 import java.util.UUID;
 import org.springframework.hateoas.server.ExposesResourceFor;
@@ -18,32 +17,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import sun.security.krb5.internal.ccache.CredentialsCache;
 
 @RestController
-@RequestMapping("/User")
-@ExposesResourceFor(User.class)
-public class UserController {
+@RequestMapping("/Student")
+@ExposesResourceFor(Student.class)
+public class StudentController {
 
-  private final UserRepository repository;
-  private final TeacherRepository
+  private CredentialsCache repository;
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> post(@RequestBody User user) {
-    repository.save(user);
-    return ResponseEntity.created(user.getEmail()).body(user);
+  public ResponseEntity<User> post(@RequestBody Student student) {
+    repository.save(student);
+    return ResponseEntity.created(student..body(student);
   })
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public User get(@PathVariable UUID id) {
-    return repository.findById(id).get();
+  public Student get(@PathVariable UUID id) {
+    return    ;
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable UUID id) {
     repository.findById(id).ifPresent((user) -> {
-      Set<User> students = user.get;
+      Set<User> students = user.getEmail();
       user.forEach((User) -> quote.setSource(null));
       students.clear();
       repository.delete(user);
@@ -58,6 +57,5 @@ public class UserController {
     user.setEmail(updated.getEmail());
     return repository.save(user);
   }
-
 
 }
