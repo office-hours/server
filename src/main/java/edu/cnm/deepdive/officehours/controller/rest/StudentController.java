@@ -1,7 +1,11 @@
-package edu.cnm.deepdive.officehours.controller;
+package edu.cnm.deepdive.officehours.controller.rest;
 
+import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Student;
 import edu.cnm.deepdive.officehours.model.entity.User;
+import edu.cnm.deepdive.officehours.service.StudentRepository;
+import edu.cnm.deepdive.officehours.view.FlatStudent;
+import java.util.List;
 import java.util.Set;
 import java.util.UUID;
 import org.springframework.hateoas.server.ExposesResourceFor;
@@ -17,45 +21,48 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import sun.security.krb5.internal.ccache.CredentialsCache;
 
 @RestController
 @RequestMapping("/Student")
 @ExposesResourceFor(Student.class)
 public class StudentController {
 
-  private CredentialsCache repository;
+  private final StudentRepository studentRepository;
+
+  public StudentController(StudentRepository studentRepository) {
+    this.studentRepository = studentRepository;
+  }
 
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> post(@RequestBody Student student) {
-    repository.save(student);
-    return ResponseEntity.created(student..body(student);
-  })
+  public ResponseEntity<Student> post(@RequestBody Student student) {
+    studentRepository.save(student);
+    return ResponseEntity.created(student.getHref()).body(student);
+  }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Student get(@PathVariable UUID id) {
-    return    ;
+  public Student getId(@PathVariable UUID id) {
+    return studentRepository.getOne(id);
   }
 
   @DeleteMapping(value = "/{id}")
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable UUID id) {
-    repository.findById(id).ifPresent((user) -> {
-      Set<User> students = user.getEmail();
-      user.forEach((User) -> quote.setSource(null));
-      students.clear();
-      repository.delete(user);
+    studentRepository.findById(id).ifPresent((student) -> {
+      List<Appointment> appointments = student.getAppointment();
+      appointments.forEach((appointment) -> appointment.setStatus("Cancelled"));
+      appointments.clear();
+      studentRepository.delete(student);
     });
   }
 
 
   @PutMapping(value = "/{id}",
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public User put(@PathVariable UUID id, @RequestBody User updated) {
-    User user = get(id);
-    user.setEmail(updated.getEmail());
-    return repository.save(user);
+  public Student put(@PathVariable UUID id, @RequestBody Student updated) {
+    Student student = getId(id);
+    student.setAppointment(updated.getAppointment());
+    return studentRepository.save(student);
   }
 
 }

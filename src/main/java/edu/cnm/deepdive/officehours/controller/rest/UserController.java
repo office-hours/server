@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
+import edu.cnm.deepdive.officehours.model.entity.Appointment;
+import edu.cnm.deepdive.officehours.model.entity.Student;
 import edu.cnm.deepdive.officehours.model.entity.User;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
 import edu.cnm.deepdive.officehours.service.UserRepository;
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/Users")
 @ExposesResourceFor(User.class)
 public class UserController {
 
@@ -43,8 +45,8 @@ public class UserController {
   @ResponseStatus(HttpStatus.NO_CONTENT)
   public void delete(@PathVariable UUID id) {
     repository.findById(id).ifPresent((user) -> {
-      Set<User> students = user.get;
-      user.forEach((User) -> quote.setSource(null));
+      Set<Appointment> appointments = ;
+      user.forEach((User) -> user.set(null));
       students.clear();
       repository.delete(user);
     });

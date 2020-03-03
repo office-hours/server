@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.officehours.controller;
+package edu.cnm.deepdive.officehours.controller.rest;
 
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
