@@ -48,15 +48,15 @@ public class AppointmentController {
     return appointmentRepository.getAllByOrderByStartDesc();
   }
 
-  @GetMapping(value = "\search", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
   public Iterable<Appointment> getAppointments(@RequestParam("q") String status) {
-    if (status.length() < 3) {
-      throw new SearchTermTooShortException();
-    }
+//    if (status.length() < 3) {
+//      throw new SearchTermTooShortException(); TODO add class for this exception.
+//    }
     return  appointmentRepository.getAllByStatusContainsOrOrderByStartDesc(status);
   }
 
-  @GetMapping(value = "\lookup", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/lookup", produces = MediaType.APPLICATION_JSON_VALUE)
   public Appointment getAppointments() {return getAppointments();}
 
   @GetMapping( value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -72,37 +72,4 @@ public class AppointmentController {
     return appointmentRepository.save(appointment);
   }
 
-  @DeleteMapping(value = "/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable UUID id) {
-    appointmentRepository.findById(id).ifPresent(appointmentRepository::delete);
-  }
-  @PutMapping(value = "/{quoteId}/source/{sourceId}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Appointment attach(@PathVariable UUID appointmentId, @PathVariable UUID teacherId){
-    Appointment appointment = get(appointmentId);
-    Teacher teacher = teacherRepository.findById(teacherId);
-    if (!teacher.equals(appointment.getTeacher())){
-      appointment.setTeacher(teacher);
-      appointmentRepository.save(appointment);
-    }
-    return appointment;
-  }
-
-  @DeleteMapping(value = "/{quoteId}/source/{sourceId}")
-  public Quote detach(@PathVariable UUID quoteId, @PathVariable UUID sourceId){
-    Quote quote = get(quoteId);
-    Source source = sourceRepository.findById(sourceId).get();
-    if (source.equals(quote.getSource())) {
-      quote.setSource(null);
-      quoteRepository.save(quote);
-    }
-    return quote;
-  }
-
-  @DeleteMapping(value = "/{quoteId}/source/")
-  public Quote clearSource(@PathVariable UUID quoteId) {
-    Quote quote = get(quoteId);
-    quote.setSource(null);
-    return quoteRepository.save(quote);
-  }
 }
