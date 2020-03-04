@@ -65,45 +65,4 @@ public class UserController {
    return repository.save(user);
  }
 
-
-@RequestMapping("/Users")
-@ExposesResourceFor(User.class)
-public class UserController {
-
-  private final UserRepository repository;
-  private final TeacherRepository
-
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<User> post(@RequestBody User user) {
-    repository.save(user);
-    return ResponseEntity.created(user.getEmail()).body(user);
-  })
-
-  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public User get(@PathVariable UUID id) {
-    return repository.findById(id).get();
-  }
-
-  @DeleteMapping(value = "/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable UUID id) {
-    repository.findById(id).ifPresent((user) -> {
-      Set<Appointment> appointments = ;
-      user.forEach((User) -> user.set(null));
-      students.clear();
-      repository.delete(user);
-    });
-  }
-
-
-  @PutMapping(value = "/{id}",
-      consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public User put(@PathVariable UUID id, @RequestBody User updated) {
-    User user = get(id);
-    user.setEmail(updated.getEmail());
-    return repository.save(user);
-  }
-
-
 }
