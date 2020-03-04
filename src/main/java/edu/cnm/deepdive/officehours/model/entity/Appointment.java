@@ -56,6 +56,8 @@ public class Appointment {
   @Column(nullable = false)
   private String status;
 
+  private String subject;
+
   @NonNull
   @Column(name = "start_time", nullable = false)
   private Date startTime;
@@ -93,6 +95,15 @@ public class Appointment {
 
   public void setStatus(@NonNull String status) {
     this.status = status;
+  }
+
+
+  public String getSubject() {
+    return subject;
+  }
+
+  public void setSubject(String subject) {
+    this.subject = subject;
   }
 
   @NonNull

@@ -72,4 +72,9 @@ public class AppointmentController {
     return appointmentRepository.save(appointment);
   }
 
+  @PutMapping(value = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
+  public void changeStatus(@PathVariable UUID id, @RequestBody String status) {
+    appointmentRepository.findById(id).ifPresent(appointment -> appointment.setStatus(status));
+  }
 }
