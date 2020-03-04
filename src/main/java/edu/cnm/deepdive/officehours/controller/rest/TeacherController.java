@@ -43,7 +43,7 @@ public class TeacherController {
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Iterable<Teacher> get() {
-    return teacherRepository.findAllOrderTeacherName();
+    return teacherRepository.getAllByOrderByTeacherName();
   }
 
   @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
