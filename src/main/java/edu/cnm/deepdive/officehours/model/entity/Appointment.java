@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import edu.cnm.deepdive.officehours.Subject;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.CascadeType;
@@ -54,7 +55,9 @@ public class Appointment {
 
   @NonNull
   @Column(nullable = false)
-  private String status;
+  private Status status;
+
+  private Subject subject;
 
   @NonNull
   @Column(name = "start_time", nullable = false)
@@ -87,12 +90,20 @@ public class Appointment {
   }
 
   @NonNull
-  public String getStatus() {
+  public Status getStatus() {
     return status;
   }
 
-  public void setStatus(@NonNull String status) {
+  public void setStatus(@NonNull Status status) {
     this.status = status;
+  }
+
+  public Subject getSubject() {
+    return subject;
+  }
+
+  public void setSubject(Subject subject) {
+    this.subject = subject;
   }
 
   @NonNull
