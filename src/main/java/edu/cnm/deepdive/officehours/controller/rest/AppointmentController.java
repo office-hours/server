@@ -1,10 +1,13 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
+import edu.cnm.deepdive.officehours.Status;
+import edu.cnm.deepdive.officehours.StatusConverter;
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.service.AppointmentRepository;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
 import java.util.UUID;
+import javax.persistence.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
+@Converter
 @RestController
 @RequestMapping("/appointments")
 @ExposesResourceFor(Appointment.class)
@@ -74,7 +78,7 @@ public class AppointmentController {
 
   @PutMapping(value = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
   @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void changeStatus(@PathVariable UUID id, @RequestBody String status) {
-    appointmentRepository.findById(id).ifPresent(appointment -> appointment.setStatus(status));
+  public void changeStatus(@PathVariable UUID id, @RequestBody Status status) {
+    appointmentRepository.findById(id).ifPresent(appointment -> appointment.setStatus(status.ordinal()));
   }
 }
