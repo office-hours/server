@@ -15,4 +15,7 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
   @Query(value = "SELECT * FROM Appointment ORDER BY start_time ", nativeQuery = true)
   List<Appointment> getAppointments();
 
+  Object getAllByOrderByCreatedDesc();
+
+  List<Object> getRandom();
 }
