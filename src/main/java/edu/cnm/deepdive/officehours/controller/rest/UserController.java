@@ -49,7 +49,7 @@ public class UserController {
  @ResponseStatus(HttpStatus.NO_CONTENT)
  public void delete(@PathVariable UUID id) {
    repository.findById(id).ifPresent((user) -> {
-     Set<User> users = user.getSomething;
+     Set<User> users = user.;
      user.forEach((User) -> user.getCreated()));
      user.clear();
      repository.delete(user);
