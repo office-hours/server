@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
+import edu.cnm.deepdive.officehours.Status;
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
@@ -34,11 +35,10 @@ public class TeacherController {
     this.teacherRepository = teacherRepository;
   }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Teacher> post(@RequestBody Teacher teacher) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public Teacher post(@RequestBody Teacher teacher) {
     teacherRepository.save(teacher);
-    return ResponseEntity.created(teacher.getHref()).body(teacher);
+    return teacher;
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -64,7 +64,7 @@ public class TeacherController {
   public void delete(@PathVariable UUID id) {
     teacherRepository.findById(id).ifPresent((teacher) -> {
       List<Appointment> appointments = teacher.getAppointment();
-      appointments.forEach((appointment) -> appointment.setStatus("Cancelled"));
+      appointments.forEach((appointment) -> appointment.setStatus(Status.CANCELLED));
       appointments.clear();
       teacherRepository.delete(teacher);
     });

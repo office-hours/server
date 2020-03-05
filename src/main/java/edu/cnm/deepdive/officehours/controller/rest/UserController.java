@@ -38,23 +38,23 @@ public class UserController {
  public ResponseEntity<User> post(@RequestBody User user) {
    repository.save(user);
    return ResponseEntity.created(user.getHref()).body(user);
- })
+ }
 
  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
  public User get(@PathVariable UUID id) {
    return repository.findById(id).get();
  }
 
- @DeleteMapping(value = "/{id}")
- @ResponseStatus(HttpStatus.NO_CONTENT)
- public void delete(@PathVariable UUID id) {
-   repository.findById(id).ifPresent((user) -> {
-     Set<User> users = user.;
-     user.forEach((User) -> user.getCreated()));
-     user.clear();
-     repository.delete(user);
-   });
- }
+// @DeleteMapping(value = "/{id}")
+// @ResponseStatus(HttpStatus.NO_CONTENT)
+// public void delete(@PathVariable UUID id) {
+//   repository.findById(id).ifPresent((user) -> {
+//     Set<User> users = user.;
+//     user.forEach((User) -> user.getCreated()));
+//     user.clear();
+//     repository.delete(user);
+//   });
+// }
 
 
  @PutMapping(value = "/{id}",

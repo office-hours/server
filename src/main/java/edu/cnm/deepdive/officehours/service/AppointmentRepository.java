@@ -8,14 +8,14 @@ import org.springframework.data.jpa.repository.Query;
 
 public interface AppointmentRepository extends JpaRepository<Appointment, UUID> {
 
-  Iterable<Appointment> getAllByOrderByStartDesc();
+  Iterable<Appointment> getAllByOrderByStartTimeDesc();
 
-  Iterable<Appointment> getAllByStatusContainsOrOrderByStartDesc(String status);
+//  Iterable<Appointment> getAllByStatusContainsOrOrderByStartDesc(String status);
 
   @Query(value = "SELECT * FROM Appointment ORDER BY start_time ", nativeQuery = true)
   List<Appointment> getAppointments();
 
   Object getAllByOrderByCreatedDesc();
 
-  List<Object> getRandom();
+//  List<Object> getRandom();
 }

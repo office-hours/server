@@ -1,5 +1,6 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import edu.cnm.deepdive.officehours.Status;
 import edu.cnm.deepdive.officehours.Subject;
 import java.util.Date;
 import java.util.UUID;
@@ -78,6 +79,14 @@ public class Appointment {
   @Temporal(TemporalType.TIMESTAMP)
   @Column(nullable = false)
   private Date updated;
+
+  public void setStudent(@NonNull Student student) {
+    this.student = student;
+  }
+
+  public void setTeacher(@NonNull Teacher teacher) {
+    this.teacher = teacher;
+  }
 
   @NonNull
   public Date getEnd() {

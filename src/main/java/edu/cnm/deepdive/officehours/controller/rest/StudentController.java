@@ -1,7 +1,9 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
+import edu.cnm.deepdive.officehours.Status;
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Student;
+import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.model.entity.User;
 import edu.cnm.deepdive.officehours.service.StudentRepository;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
@@ -33,11 +35,10 @@ public class StudentController {
     this.studentRepository = studentRepository;
   }
 
-  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
-  public ResponseEntity<Student> post(@RequestBody Student student) {
+  @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
+  public Student post(@RequestBody Student student) {
     studentRepository.save(student);
-    return ResponseEntity.created(student.getHref()).body(student);
+    return student;
   }
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -50,7 +51,7 @@ public class StudentController {
   public void delete(@PathVariable UUID id) {
     studentRepository.findById(id).ifPresent((student) -> {
       List<Appointment> appointments = student.getAppointment();
-      appointments.forEach((appointment) -> appointment.setStatus("Cancelled"));
+      appointments.forEach((appointment) -> appointment.setStatus(Status.CANCELLED));
       appointments.clear();
       studentRepository.delete(student);
     });

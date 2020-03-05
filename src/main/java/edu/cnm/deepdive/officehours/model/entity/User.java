@@ -25,6 +25,7 @@ import org.springframework.stereotype.Component;
 @Component
 @Entity
 @Table(
+    name = "base_user",
     indexes = {
         @Index(columnList = "created")
     }

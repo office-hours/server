@@ -29,8 +29,8 @@ public class Teacher implements FlatTeacher {
 
   @NonNull
   @Id
-  @GeneratedValue(generator = "uuid3")
-  @GenericGenerator(name = "uuid3", strategy = "uuid3")
+  @GeneratedValue(generator = "uuid2")
+  @GenericGenerator(name = "uuid2", strategy = "uuid2")
   @Column(name = "teacher_id", columnDefinition = "CHAR(16) FOR BIT DATA",
       nullable = false, updatable = false)
   private UUID id;
@@ -49,6 +49,19 @@ public class Teacher implements FlatTeacher {
       CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
   })
   private List<Appointment> appointment = new LinkedList<>();
+
+  @NonNull
+  @Column( name = "teacher_name")
+  private String teacherName;
+
+  @NonNull
+  public String getTeacherName() {
+    return teacherName;
+  }
+
+  public void setTeacherName(@NonNull String teacherName) {
+    this.teacherName = teacherName;
+  }
 
   @NonNull
   public UUID getId() {
