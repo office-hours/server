@@ -9,6 +9,7 @@ public enum Status {
 
   private String code;
 
+
   private Status(String code) {
     this.code = code;
   }

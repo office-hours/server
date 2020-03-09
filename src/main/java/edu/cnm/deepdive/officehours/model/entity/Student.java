@@ -48,6 +48,19 @@ public class Student implements FlatStudent {
   private List<Appointment> appointment = new LinkedList<>();
 
   @NonNull
+  @Column(name = "student_name")
+  private String studentName;
+
+  @NonNull
+  public String getStudentName() {
+    return studentName;
+  }
+
+  public void setStudentName(@NonNull String studentName) {
+    this.studentName = studentName;
+  }
+
+  @NonNull
   public List<Appointment> getAppointment() {
     return appointment;
   }
