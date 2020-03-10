@@ -28,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/student")
 @ExposesResourceFor(Student.class)
 public class StudentController {
+/*
 
   private final StudentRepository studentRepository;
 
@@ -65,5 +66,6 @@ public class StudentController {
     student.setAppointment(updated.getAppointment());
     return studentRepository.save(student);
   }
+*/
 
 }

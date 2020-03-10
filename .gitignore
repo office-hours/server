@@ -29,3 +29,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+/office-hours_db
+derby.log
