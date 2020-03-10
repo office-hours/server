@@ -1,14 +1,19 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
-import edu.cnm.deepdive.officehours.Status;
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
+import edu.cnm.deepdive.officehours.model.entity.Appointment.Status;
 import edu.cnm.deepdive.officehours.model.entity.Student;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.service.AppointmentRepository;
 import edu.cnm.deepdive.officehours.service.StudentRepository;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -18,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -55,6 +61,13 @@ public class AppointmentController {
     return appointmentRepository.getAllByOrderByStartTimeDesc();
   }
 
+  @GetMapping(value = "/range", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Appointment> getBetweenDate(
+      @RequestParam(value = "start", required = false) @DateTimeFormat(iso = ISO.DATE) Date startDate,
+      @RequestParam(value = "end", required = false) @DateTimeFormat(iso = ISO.DATE) Date endDate) {
+    return appointmentRepository.findAllByAppointmentDateBetween(startDate, endDate);
+  }
+
 //  @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
 //  public Iterable<Appointment> getAppointments(@RequestParam("q") String status) {
 ////    if (status.length() < 3) {
@@ -68,18 +81,18 @@ public class AppointmentController {
     return getAppointments();
   }
 
-  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Appointment get(@PathVariable UUID id) {
-    return appointmentRepository.findById(id).get();
-  }
-
-  @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
-  public Appointment put(@PathVariable UUID id, @RequestBody Appointment modifiedAppointment) {
-    Appointment appointment = get(id);
-    appointment.setStatus(modifiedAppointment.getStatus());
-    return appointmentRepository.save(appointment);
-  }
+//  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+//  public Appointment get(@PathVariable UUID id) {
+//    return appointmentRepository.findById(id).get();
+//  }
+//
+//  @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+//      produces = MediaType.APPLICATION_JSON_VALUE)
+//  public Appointment put(@PathVariable UUID id, @RequestBody Appointment modifiedAppointment) {
+//    Appointment appointment = get(id);
+//    appointment.setStatus(modifiedAppointment.getStatus());
+//    return appointmentRepository.save(appointment);
+//  }
 
   @PutMapping(value = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
   @ResponseStatus(HttpStatus.NO_CONTENT)

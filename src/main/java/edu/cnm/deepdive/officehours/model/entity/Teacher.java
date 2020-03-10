@@ -2,6 +2,7 @@ package edu.cnm.deepdive.officehours.model.entity;
 
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
 import java.net.URI;
+import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.UUID;
@@ -14,6 +15,8 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
 import org.hibernate.annotations.GenericGenerator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.EntityLinks;
@@ -53,6 +56,7 @@ public class Teacher implements FlatTeacher {
   @NonNull
   @Column( name = "teacher_name", unique = true)
   private String teacherName;
+
 
   @NonNull
   public String getTeacherName() {

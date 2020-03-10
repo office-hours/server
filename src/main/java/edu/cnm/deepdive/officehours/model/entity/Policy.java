@@ -1,7 +1,7 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
-import edu.cnm.deepdive.officehours.Status;
-import edu.cnm.deepdive.officehours.Subject;
+import edu.cnm.deepdive.officehours.model.entity.Appointment.Status;
+import edu.cnm.deepdive.officehours.model.entity.Appointment.Subject;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.CascadeType;

@@ -1,19 +1,14 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
-import edu.cnm.deepdive.officehours.Status;
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
+import edu.cnm.deepdive.officehours.model.entity.Appointment.Status;
 import edu.cnm.deepdive.officehours.model.entity.Student;
-import edu.cnm.deepdive.officehours.model.entity.Teacher;
-import edu.cnm.deepdive.officehours.model.entity.User;
 import edu.cnm.deepdive.officehours.service.StudentRepository;
-import edu.cnm.deepdive.officehours.view.FlatStudent;
 import java.util.List;
-import java.util.Set;
 import java.util.UUID;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -28,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/student")
 @ExposesResourceFor(Student.class)
 public class StudentController {
-/*
+
 
   private final StudentRepository studentRepository;
 
@@ -66,6 +61,5 @@ public class StudentController {
     student.setAppointment(updated.getAppointment());
     return studentRepository.save(student);
   }
-*/
 
 }

@@ -1,7 +1,10 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
+import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.ExposesResourceFor;
@@ -28,6 +31,7 @@ private final TeacherRepository teacherRepository;
   public TeacherController(TeacherRepository teacherRepository) {
     this.teacherRepository = teacherRepository;
   }
+
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

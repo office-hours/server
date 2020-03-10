@@ -1,12 +1,16 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
-import edu.cnm.deepdive.officehours.Status;
-import edu.cnm.deepdive.officehours.Subject;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import java.util.Date;
 import java.util.UUID;
+import java.util.stream.Stream;
+import javax.persistence.AttributeConverter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Converter;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.Index;
@@ -36,8 +40,8 @@ public class Appointment {
   @Id
   @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column( name = "appointment_id", columnDefinition = "CHAR(16) FOR BIT DATA",
-        nullable = false, updatable = false)
+  @Column(name = "appointment_id", columnDefinition = "CHAR(16) FOR BIT DATA",
+      nullable = false, updatable = false)
   private UUID id;
 
   @NonNull
@@ -50,23 +54,32 @@ public class Appointment {
 
   @NonNull
   @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-      CascadeType.PERSIST, CascadeType.REFRESH} )
+      CascadeType.PERSIST, CascadeType.REFRESH})
   @JoinColumn(name = "teacher_id")
   private Teacher teacher;
 
   @NonNull
+  @Enumerated(EnumType.ORDINAL)
   @Column(nullable = false)
   private Status status;
 
+  @Enumerated(EnumType.ORDINAL)
   private Subject subject;
 
   @NonNull
+  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "start_time", nullable = false)
   private Date startTime;
 
   @NonNull
+  @Temporal(TemporalType.TIMESTAMP)
   @Column(name = "end_time", nullable = false)
   private Date endTime;
+
+  @NonNull
+  @Temporal(TemporalType.DATE)
+  @Column(name = "appointment_date", nullable = false)
+  private Date appointmentDate;
 
   @NonNull
   @CreationTimestamp
@@ -79,6 +92,16 @@ public class Appointment {
   @Temporal(TemporalType.TIMESTAMP)
   @Column(nullable = false)
   private Date updated;
+
+
+  @NonNull
+  public Date getAppointmentDate() {
+    return appointmentDate;
+  }
+
+  public void setAppointmentDate(@NonNull Date appointmentDate) {
+    this.appointmentDate = appointmentDate;
+  }
 
   public void setStudent(@NonNull Student student) {
     this.student = student;
@@ -157,5 +180,88 @@ public class Appointment {
   public void setEndTime(@NonNull Date endTime) {
     this.endTime = endTime;
   }
+
+  public enum Status {
+    NO_SHOW("N"),
+    PENDING("P"),
+    LATE("L"),
+    CANCELLED("X"),
+    ARRIVED("K");
+
+    private String code;
+
+
+    private Status(String code) {
+      this.code = code;
+    }
+
+    public String getCode() {
+      return code;
+    }
+  }
+
+  public enum Subject {
+    ANDROID_PROJECT("A"),
+    CAPSTONE_PROJECT("C"),
+    TUTORING("T"),
+    GRADES("G"),
+    OTHER("O");
+
+    private String code;
+
+    private Subject(String code) {
+      this.code = code;
+    }
+
+    public String getCode() {
+      return code;
+    }
+  }
+//  @Converter(autoApply = true)
+//  public class StatusConverter implements AttributeConverter<Status, String> {
+//
+//    @Override
+//    public String convertToDatabaseColumn(Status status) {
+//      if (status == null) {
+//        return null;
+//      }
+//      return status.getCode();
+//    }
+//
+//    @Override
+//    public Status convertToEntityAttribute(String code) {
+//      if (code == null) {
+//        return null;
+//      }
+//      return Stream.of(Status.values())
+//          .filter(c -> c.getCode().equals(code))
+//          .findFirst()
+//          .orElseThrow(IllegalArgumentException::new);
+//    }
+//  }
+//
+//  @Converter(autoApply = true)
+//  public class SubjectConverter implements AttributeConverter<Subject, String> {
+//
+//    @Override
+//    public String convertToDatabaseColumn(Subject subject) {
+//      if(subject == null) {
+//        return null;
+//      }
+//      return subject.getCode();
+//    }
+//
+//    @Override
+//    public Subject convertToEntityAttribute(String code) {
+//      if(code == null) {
+//        return null;
+//      }
+//      return Stream.of(Subject.values())
+//          .filter(c -> c.getCode().equals(code))
+//          .findFirst()
+//          .orElseThrow(IllegalArgumentException::new);
+//
+//    }
+//  }
 
 }

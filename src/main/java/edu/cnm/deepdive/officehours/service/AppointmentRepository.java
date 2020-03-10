@@ -1,6 +1,8 @@
 package edu.cnm.deepdive.officehours.service;
 
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -10,12 +12,16 @@ public interface AppointmentRepository extends JpaRepository<Appointment, UUID> 
 
   Iterable<Appointment> getAllByOrderByStartTimeDesc();
 
-//  Iterable<Appointment> getAllByStatusContainsOrOrderByStartDesc(String status);
+  List<Appointment> findAllByStartTimeBetween(Date startTime, Date endTime);
 
-  @Query(value = "SELECT * FROM Appointment ORDER BY start_time ", nativeQuery = true)
-  List<Appointment> getAppointments();
+  List<Appointment> findAllByAppointmentDateBetween(Date startDate, Date endDate);
+
+//  Iterable<Appointment> getAllByOrderByStartTimeAsc(String status);
+
 
   Object getAllByOrderByCreatedDesc();
 
 //  List<Object> getRandom();
-}
+
+  }
+
