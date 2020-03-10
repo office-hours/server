@@ -51,7 +51,7 @@ public class Teacher implements FlatTeacher {
   private List<Appointment> appointment = new LinkedList<>();
 
   @NonNull
-  @Column( name = "teacher_name")
+  @Column( name = "teacher_name", unique = true)
   private String teacherName;
 
   @NonNull
