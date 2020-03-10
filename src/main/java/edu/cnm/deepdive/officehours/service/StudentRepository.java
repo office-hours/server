@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface StudentRepository extends JpaRepository<Student, UUID> {
 
-  Iterable<Student> getAllByOrderById();
+  Iterable<Student> getAllByOrderByStudentName();
 
   Iterable<Student> getAllByStudentNameContainsOrderByStudentNameAsc(String studentName);
 

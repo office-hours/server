@@ -42,17 +42,10 @@ public class StudentController {
     return studentRepository.getOne(id);
   }
 
-  @DeleteMapping(value = "/{id}")
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void delete(@PathVariable UUID id) {
-    studentRepository.findById(id).ifPresent((student) -> {
-      List<Appointment> appointments = student.getAppointment();
-      appointments.forEach((appointment) -> appointment.setStatus(Status.CANCELLED));
-      appointments.clear();
-      studentRepository.delete(student);
-    });
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public Iterable<Student> get() {
+    return studentRepository.getAllByOrderByStudentName();
   }
-
 
   @PutMapping(value = "/{id}",
       consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

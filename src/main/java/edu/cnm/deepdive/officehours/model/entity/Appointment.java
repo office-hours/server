@@ -117,11 +117,6 @@ public class Appointment implements FlatAppointment {
   }
 
   @NonNull
-  public Date getEnd() {
-    return endTime;
-  }
-
-  @NonNull
   public UUID getId() {
     return id;
   }
@@ -141,11 +136,6 @@ public class Appointment implements FlatAppointment {
 
   public void setSubject(Subject subject) {
     this.subject = subject;
-  }
-
-  @NonNull
-  public Date getStart() {
-    return startTime;
   }
 
   @NonNull
