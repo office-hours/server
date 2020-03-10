@@ -2,6 +2,7 @@ package edu.cnm.deepdive.officehours.model.entity;
 
 import edu.cnm.deepdive.officehours.Status;
 import edu.cnm.deepdive.officehours.Subject;
+import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.CascadeType;
@@ -30,7 +31,7 @@ import org.springframework.lang.NonNull;
         @Index(columnList = "created")
     }
 )
-public class Appointment {
+public class Appointment implements FlatAppointment {
 
   @NonNull
   @Id
