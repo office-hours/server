@@ -1,20 +1,21 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
-import edu.cnm.deepdive.officehours.Status;
-import edu.cnm.deepdive.officehours.StatusConverter;
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
+import edu.cnm.deepdive.officehours.model.entity.Appointment.Status;
 import edu.cnm.deepdive.officehours.model.entity.Student;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.service.AppointmentRepository;
 import edu.cnm.deepdive.officehours.service.StudentRepository;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
+import java.util.Date;
+import java.util.List;
 import java.util.UUID;
-import javax.persistence.Converter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
+import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -54,30 +55,32 @@ public class AppointmentController {
     return appointment;
   }
 
-  @GetMapping(produces =  MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
   public Iterable<Appointment> get() {
     return appointmentRepository.getAllByOrderByStartTimeDesc();
   }
 
-//  @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-//  public Iterable<Appointment> getAppointments(@RequestParam("q") String status) {
-////    if (status.length() < 3) {
-////      throw new SearchTermTooShortException(); TODO add class for this exception.
-////    }
-//    return  appointmentRepository.getAllByStatusContainsOrOrderByStartDesc(status);
-//  }
+  @GetMapping(value = "/range", produces = MediaType.APPLICATION_JSON_VALUE)
+  public List<Appointment> getBetweenDate(
+      @RequestParam(value = "start", required = false) @DateTimeFormat(iso = ISO.DATE) Date startDate,
+      @RequestParam(value = "end", required = false) @DateTimeFormat(iso = ISO.DATE) Date endDate) {
+    return appointmentRepository.findAllByAppointmentDateBetween(startDate, endDate);
+  }
+
 
   @GetMapping(value = "/lookup", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Appointment getAppointments() {return getAppointments();}
+  public Appointment getAppointments() {
+    return getAppointments();
+  }
 
-  @GetMapping( value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Appointment get(@PathVariable UUID id) {
     return appointmentRepository.findById(id).get();
   }
 
   @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
-  public Appointment put(@PathVariable UUID id,@RequestBody Appointment modifiedAppointment) {
+  public Appointment put(@PathVariable UUID id, @RequestBody Appointment modifiedAppointment) {
     Appointment appointment = get(id);
     appointment.setStatus(modifiedAppointment.getStatus());
     return appointmentRepository.save(appointment);
