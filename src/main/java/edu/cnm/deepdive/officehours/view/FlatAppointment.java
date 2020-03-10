@@ -12,13 +12,7 @@ import org.springframework.lang.NonNull;
 public interface FlatAppointment {
 
     @NonNull
-    Date getEnd();
-
-    @NonNull
      UUID getId();
-
-    @NonNull
-    Date getStart();
 
     @NonNull
     Date getCreated();
