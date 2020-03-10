@@ -7,7 +7,6 @@ import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.service.AppointmentRepository;
 import edu.cnm.deepdive.officehours.service.StudentRepository;
 import edu.cnm.deepdive.officehours.service.TeacherRepository;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -68,31 +67,24 @@ public class AppointmentController {
     return appointmentRepository.findAllByAppointmentDateBetween(startDate, endDate);
   }
 
-//  @GetMapping(value = "/search", produces = MediaType.APPLICATION_JSON_VALUE)
-//  public Iterable<Appointment> getAppointments(@RequestParam("q") String status) {
-////    if (status.length() < 3) {
-////      throw new SearchTermTooShortException(); TODO add class for this exception.
-////    }
-//    return  appointmentRepository.getAllByStatusContainsOrOrderByStartDesc(status);
-//  }
 
   @GetMapping(value = "/lookup", produces = MediaType.APPLICATION_JSON_VALUE)
   public Appointment getAppointments() {
     return getAppointments();
   }
 
-//  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-//  public Appointment get(@PathVariable UUID id) {
-//    return appointmentRepository.findById(id).get();
-//  }
-//
-//  @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
-//      produces = MediaType.APPLICATION_JSON_VALUE)
-//  public Appointment put(@PathVariable UUID id, @RequestBody Appointment modifiedAppointment) {
-//    Appointment appointment = get(id);
-//    appointment.setStatus(modifiedAppointment.getStatus());
-//    return appointmentRepository.save(appointment);
-//  }
+  @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+  public Appointment get(@PathVariable UUID id) {
+    return appointmentRepository.findById(id).get();
+  }
+
+  @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
+      produces = MediaType.APPLICATION_JSON_VALUE)
+  public Appointment put(@PathVariable UUID id, @RequestBody Appointment modifiedAppointment) {
+    Appointment appointment = get(id);
+    appointment.setStatus(modifiedAppointment.getStatus());
+    return appointmentRepository.save(appointment);
+  }
 
   @PutMapping(value = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
   @ResponseStatus(HttpStatus.NO_CONTENT)
