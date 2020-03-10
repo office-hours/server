@@ -18,12 +18,6 @@ public interface FlatAppointment {
 
     @NonNull
      UUID getId();
-    @NonNull
-     Status getStatus();
-
-    @NonNull
-    Subject getSubject();
-
 
     @NonNull
     Date getStart();
@@ -39,6 +33,9 @@ public interface FlatAppointment {
 
     @NonNull
     Teacher getTeacher();
+
+    @NonNull
+    Date getStartTime();
 
     @NonNull
     Date getEndTime();
