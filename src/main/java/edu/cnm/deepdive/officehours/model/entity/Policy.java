@@ -24,13 +24,19 @@ import org.springframework.lang.NonNull;
 @Entity
 @Table(
     indexes = {
-        @Index(columnList = "status"),
-        @Index(columnList = "start_time"),
-        @Index(columnList = "end_time"),
         @Index(columnList = "created")
     }
 )
 public class Policy {
+
+    @NonNull
+    @Id
+    @GeneratedValue(generator = "uuid2")
+    @GenericGenerator(name = "uuid2", strategy = "uuid2")
+    @Column( name = "policy_id", columnDefinition = "CHAR(16) FOR BIT DATA",
+        nullable = false, updatable = false)
+    private UUID id;
+
 
     @NonNull
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
@@ -48,6 +54,12 @@ public class Policy {
     @CreationTimestamp
     @Temporal(TemporalType.TIMESTAMP)
     @Column(nullable = false, updatable = false)
+    private Date date;
+
+    @NonNull
+    @CreationTimestamp
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(nullable = false, updatable = false)
     private Date created;
 
     @NonNull
@@ -56,7 +68,9 @@ public class Policy {
     @Column(nullable = false)
     private Date updated;
 
-    private
+    @NonNull
+    @Column(nullable = false, updatable = true)
+    private int blockTime;
 
 
 }
