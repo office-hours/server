@@ -1,6 +1,6 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
-import edu.cnm.deepdive.officehours.view.FlatUser;
+import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
@@ -30,7 +30,7 @@ import org.springframework.stereotype.Component;
         @Index(columnList = "created")
     }
 )
-public class User implements FlatUser {
+public class User {
 
   private static EntityLinks entityLinks;
 
