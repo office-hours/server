@@ -1,6 +1,7 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
 import java.util.Date;
@@ -36,7 +37,7 @@ import org.springframework.lang.NonNull;
         @Index(columnList = "created")
     }
 )
-public class Appointment {
+public class Appointment implements FlatAppointment {
 
   @NonNull
   @Id
@@ -221,51 +222,6 @@ public class Appointment {
       return code;
     }
   }
-//  @Converter(autoApply = true)
-//  public class StatusConverter implements AttributeConverter<Status, String> {
-//
-//    @Override
-//    public String convertToDatabaseColumn(Status status) {
-//      if (status == null) {
-//        return null;
-//      }
-//      return status.getCode();
-//    }
-//
-//    @Override
-//    public Status convertToEntityAttribute(String code) {
-//      if (code == null) {
-//        return null;
-//      }
-//      return Stream.of(Status.values())
-//          .filter(c -> c.getCode().equals(code))
-//          .findFirst()
-//          .orElseThrow(IllegalArgumentException::new);
-//    }
-//  }
-//
-//  @Converter(autoApply = true)
-//  public class SubjectConverter implements AttributeConverter<Subject, String> {
-//
-//    @Override
-//    public String convertToDatabaseColumn(Subject subject) {
-//      if(subject == null) {
-//        return null;
-//      }
-//      return subject.getCode();
-//    }
-//
-//    @Override
-//    public Subject convertToEntityAttribute(String code) {
-//      if(code == null) {
-//        return null;
-//      }
-//      return Stream.of(Subject.values())
-//          .filter(c -> c.getCode().equals(code))
-//          .findFirst()
-//          .orElseThrow(IllegalArgumentException::new);
-//
-//    }
-//  }
+
 
 }
