@@ -1,10 +1,13 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
 import java.net.URI;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import java.util.UUID;
 import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
@@ -23,6 +26,7 @@ import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+@SuppressWarnings("JpaDataSourceORMInspection")
 @Component
 @Entity
 public class Teacher implements FlatTeacher {
@@ -51,6 +55,7 @@ public class Teacher implements FlatTeacher {
       cascade = {
       CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
   })
+  @JsonSerialize(contentAs = FlatAppointment.class)
   private List<Appointment> appointment = new LinkedList<>();
 
   @NonNull
@@ -58,19 +63,25 @@ public class Teacher implements FlatTeacher {
   private String teacherName;
 
 
-  @NonNull
+  @Override
+  public UUID getId() {
+    return id;
+  }
+
+  @Override
   public String getTeacherName() {
     return teacherName;
+  }
+
+  @Override
+  public URI getHref() {
+    return entityLinks.linkForItemResource(Teacher.class, id).toUri();
   }
 
   public void setTeacherName(@NonNull String teacherName) {
     this.teacherName = teacherName;
   }
 
-  @NonNull
-  public UUID getId() {
-    return id;
-  }
 
   @NonNull
   public User getUser() {
@@ -91,8 +102,21 @@ public class Teacher implements FlatTeacher {
     this.user = user;
   }
 
-  public URI getHref() {
-    return entityLinks.linkForItemResource(Teacher.class, id).toUri();
+  @Override
+  public int hashCode() {
+    return Objects.hash(id, teacherName);
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    boolean result = false;
+    if (obj == this) {
+      result = true;
+    } else if (obj instanceof  Teacher && obj.hashCode() == hashCode()){
+      Teacher other = (Teacher) obj;
+      result = id.equals(other.id) && teacherName.equals(other.teacherName);
+    }
+    return result;
   }
 
   @PostConstruct

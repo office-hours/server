@@ -45,6 +45,7 @@ public class AppointmentController {
     this.studentRepository = studentRepository;
   }
 
+  @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
   public Appointment post(@RequestBody Appointment appointment) {
     Teacher teacher = teacherRepository.findOrFail(appointment.getTeacher().getId());
@@ -64,34 +65,14 @@ public class AppointmentController {
   public List<Appointment> getBetweenDate(
       @RequestParam(value = "start", required = false) @DateTimeFormat(iso = ISO.DATE) Date startDate,
       @RequestParam(value = "end", required = false) @DateTimeFormat(iso = ISO.DATE) Date endDate) {
-    return appointmentRepository.findAllByAppointmentDateBetween(startDate, endDate);
+    return appointmentRepository.findAllByStartTimeBetween(startDate, endDate);
   }
 
-  @GetMapping(value = "/find_status", produces = MediaType.APPLICATION_JSON_VALUE)
+  @GetMapping(value = "/status", produces = MediaType.APPLICATION_JSON_VALUE)
   public List<Appointment> getStatusByDateRange(@RequestParam(value = "status") Status status,
       @RequestParam(value = "start", required = false) @DateTimeFormat(iso = ISO.DATE) Date startDate,
       @RequestParam(value = "end", required = false) @DateTimeFormat(iso = ISO.DATE) Date endDate) {
-    return appointmentRepository.findAllByStatusAndAppointmentDateIsBetween(status,startDate, endDate);
-  }
-
-
-  @GetMapping(value = "/find_teacher", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Appointment> getAppointmentWithTeacherByDateRange(@RequestParam(value = "teacher") Teacher teacher,
-      @RequestParam(value = "start", required = false) @DateTimeFormat(iso = ISO.DATE) Date startDate,
-      @RequestParam(value = "end", required = false) @DateTimeFormat(iso = ISO.DATE) Date endDate) {
-    return appointmentRepository.findAllByTeacherAndAppointmentDateIsBetween(teacher, startDate, endDate);
-  }
-
-  @GetMapping(value = "/find_student", produces = MediaType.APPLICATION_JSON_VALUE)
-  public List<Appointment> getAppointmentWithStudentByDateRange(@RequestParam(value = "student") Student student,
-      @RequestParam(value = "start", required = false) @DateTimeFormat(iso = ISO.DATE) Date startDate,
-      @RequestParam(value = "end", required = false) @DateTimeFormat(iso = ISO.DATE) Date endDate) {
-    return appointmentRepository.findAllByStudentAndAppointmentDateIsBetween(student, startDate, endDate);
-  }
-
-  @GetMapping(value = "/lookup", produces = MediaType.APPLICATION_JSON_VALUE)
-  public Appointment getAppointments() {
-    return getAppointments();
+    return appointmentRepository.findAllByStatusAndStartTimeIsBetween(status,startDate, endDate);
   }
 
   @GetMapping(value = "{id}", produces = MediaType.APPLICATION_JSON_VALUE)
@@ -101,15 +82,12 @@ public class AppointmentController {
 
   @PutMapping(value = "/{id}", consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
+  @ResponseStatus(HttpStatus.NO_CONTENT)
   public Appointment put(@PathVariable UUID id, @RequestBody Appointment modifiedAppointment) {
     Appointment appointment = get(id);
-    appointment.setStatus(modifiedAppointment.getStatus());
+    appointment.setStartTime(modifiedAppointment.getStartTime());
+    appointment.setEndTime(modifiedAppointment.getEndTime());
     return appointmentRepository.save(appointment);
   }
 
-  @PutMapping(value = "/{id}", consumes = MediaType.TEXT_PLAIN_VALUE)
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public void changeStatus(@PathVariable UUID id, @RequestBody Status status) {
-    appointmentRepository.findById(id).ifPresent(appointment -> appointment.setStatus(status));
-  }
 }

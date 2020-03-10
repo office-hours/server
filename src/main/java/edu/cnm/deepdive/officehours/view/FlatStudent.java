@@ -6,14 +6,15 @@ import java.net.URI;
 import java.util.UUID;
 import org.springframework.lang.NonNull;
 
-  @JsonPropertyOrder({"id", "user", "href"})
+  @JsonPropertyOrder({"id", "student_name", "href"})
   public interface FlatStudent {
 
     @NonNull
     UUID getId();
 
+
     @NonNull
-    User getUser();
+    String getStudentName();
 
     @NonNull
     URI getHref();

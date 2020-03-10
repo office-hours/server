@@ -9,17 +9,14 @@ import java.util.List;
 import java.util.UUID;
 import org.springframework.lang.NonNull;
 
-@JsonPropertyOrder({"id", "href", "user", "appointment"})
+@JsonPropertyOrder({"id", "teacher_name","href"})
 public interface FlatTeacher {
 
     @NonNull
     UUID getId();
 
     @NonNull
-    User getUser();
-
-    @NonNull
-    List<Appointment> getAppointment();
+    String getTeacherName();
 
     @NonNull
     URI getHref();

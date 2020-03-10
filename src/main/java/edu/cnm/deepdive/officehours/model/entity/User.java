@@ -1,6 +1,9 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.officehours.view.FlatAppointment;
+import edu.cnm.deepdive.officehours.view.FlatStudent;
+import edu.cnm.deepdive.officehours.view.FlatTeacher;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
@@ -62,10 +65,12 @@ public class User {
 
   @OneToOne(mappedBy = "user",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @JsonSerialize(as = FlatTeacher.class)
   private Teacher teacher;
 
   @OneToOne (mappedBy = "user",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @JsonSerialize(as = FlatStudent.class)
   private Student student;
 
   @NonNull

@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
 import java.net.URI;
 import java.util.LinkedList;
@@ -45,6 +47,7 @@ public class Student implements FlatStudent {
   @NonNull
   @OneToMany(mappedBy = "student",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+  @JsonSerialize(contentAs = FlatAppointment.class)
   private List<Appointment> appointment = new LinkedList<>();
 
   @NonNull

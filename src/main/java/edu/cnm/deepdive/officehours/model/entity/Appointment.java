@@ -4,9 +4,11 @@ import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
+import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import java.util.stream.Stream;
+import javax.annotation.PostConstruct;
 import javax.persistence.AttributeConverter;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
@@ -26,8 +28,12 @@ import javax.persistence.TemporalType;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
+@Component
 @Entity
 @Table(
     indexes = {
@@ -38,6 +44,9 @@ import org.springframework.lang.NonNull;
     }
 )
 public class Appointment implements FlatAppointment {
+
+  private static EntityLinks entityLinks;
+
 
   @NonNull
   @Id
@@ -82,11 +91,6 @@ public class Appointment implements FlatAppointment {
   private Date endTime;
 
   @NonNull
-  @Temporal(TemporalType.DATE)
-  @Column(name = "appointment_date", nullable = false)
-  private Date appointmentDate;
-
-  @NonNull
   @CreationTimestamp
   @Temporal(TemporalType.TIMESTAMP)
   @Column(nullable = false, updatable = false)
@@ -97,16 +101,6 @@ public class Appointment implements FlatAppointment {
   @Temporal(TemporalType.TIMESTAMP)
   @Column(nullable = false)
   private Date updated;
-
-
-  @NonNull
-  public Date getAppointmentDate() {
-    return appointmentDate;
-  }
-
-  public void setAppointmentDate(@NonNull Date appointmentDate) {
-    this.appointmentDate = appointmentDate;
-  }
 
   public void setStudent(@NonNull Student student) {
     this.student = student;
@@ -174,6 +168,18 @@ public class Appointment implements FlatAppointment {
 
   public void setEndTime(@NonNull Date endTime) {
     this.endTime = endTime;
+  }
+
+  public URI getHref() {
+    return entityLinks.linkForItemResource(Appointment.class, id).toUri();
+  }
+  @PostConstruct
+  private void init() {
+    entityLinks.toString();
+  }
+  @Autowired
+  private void setEntityLinks(EntityLinks entityLinks) {
+    Appointment.entityLinks = entityLinks;
   }
 
   public enum Status {
