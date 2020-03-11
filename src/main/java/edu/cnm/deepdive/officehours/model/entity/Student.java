@@ -87,6 +87,7 @@ public class Student implements FlatStudent {
     this.user = user;
   }
 
+
   public URI getHref() {
     return entityLinks.linkForItemResource(Student.class, id).toUri();
   }
