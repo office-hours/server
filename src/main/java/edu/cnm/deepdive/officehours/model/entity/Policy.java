@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import edu.cnm.deepdive.officehours.view.FlatTeacher;
 import java.util.Date;
 import java.util.UUID;
 import javax.persistence.CascadeType;
@@ -36,13 +38,12 @@ public class Policy {
         nullable = false, updatable = false)
     private UUID id;
 
-
     @NonNull
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-        CascadeType.PERSIST, CascadeType.REFRESH} )
+        CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "teacher_id")
+    @JsonSerialize(as = FlatTeacher.class)
     private Teacher teacher;
-
 
     @NonNull
     @Temporal(TemporalType.TIMESTAMP)
@@ -71,5 +72,54 @@ public class Policy {
     @Column(nullable = false, updatable = true)
     private Date blockTime;
 
+    @NonNull
+    public Teacher getTeacher() {
+        return teacher;
+    }
 
+    public void setTeacher(@NonNull Teacher teacher) {
+        this.teacher = teacher;
+    }
+
+    @NonNull
+    public Date getStartAvailable() {
+        return startAvailable;
+    }
+
+    public void setStartAvailable(@NonNull Date startAvailable) {
+        this.startAvailable = startAvailable;
+    }
+
+    @NonNull
+    public Date getEndAvailable() {
+        return endAvailable;
+    }
+
+    public void setEndAvailable(@NonNull Date endAvailable) {
+        this.endAvailable = endAvailable;
+    }
+
+    @NonNull
+    public Date getBlockTime() {
+        return blockTime;
+    }
+
+    public void setBlockTime(@NonNull Date blockTime) {
+        this.blockTime = blockTime;
+    }
+
+    @NonNull
+    public UUID getId() {
+        return id;
+    }
+
+    @NonNull
+    public Date getCreated() {
+        return created;
+    }
+
+    @NonNull
+    public Date getUpdated() {
+        return updated;
+    }
 }
