@@ -63,6 +63,7 @@ private final UserRepository userRepository;
     return teacherRepository.save(teacher);
   }
 
+
   @GetMapping(value = "/{id}/appointments")
   public Iterable<Appointment> getAppointments(@PathVariable UUID id) {
     return teacherRepository.findOrFail(id).getAppointment();

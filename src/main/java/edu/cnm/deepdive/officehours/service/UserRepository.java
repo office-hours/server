@@ -9,8 +9,6 @@ public interface UserRepository extends JpaRepository<User, UUID> {
 
   Iterable<User> findAllByOrderById();
 
-  Iterable<User> getAllByIdContainsOrderByIdAsc(String fragment);
-
   default User findOrFail(UUID id) {
     return findById(id).get();
   }

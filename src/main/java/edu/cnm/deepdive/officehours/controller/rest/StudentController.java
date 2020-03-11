@@ -2,7 +2,6 @@ package edu.cnm.deepdive.officehours.controller.rest;
 
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Student;
-import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.model.entity.User;
 import edu.cnm.deepdive.officehours.service.StudentRepository;
 import edu.cnm.deepdive.officehours.service.UserRepository;

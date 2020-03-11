@@ -1,17 +1,14 @@
 package edu.cnm.deepdive.officehours.view;
 
 import com.fasterxml.jackson.annotation.JsonPropertyOrder;
-
 import edu.cnm.deepdive.officehours.model.entity.Appointment.Status;
 import edu.cnm.deepdive.officehours.model.entity.Appointment.Subject;
-import edu.cnm.deepdive.officehours.model.entity.Student;
-import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
 import org.springframework.lang.NonNull;
 
-@JsonPropertyOrder({"id", "created", "updated", "status", "subject", "start_time", "end_time", "href"})
+@JsonPropertyOrder({"id", "created", "updated", "status", "subject", "starTime", "endTime", "href"})
 public interface FlatAppointment {
 
     @NonNull

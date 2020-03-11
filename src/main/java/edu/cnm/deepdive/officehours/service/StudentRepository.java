@@ -8,8 +8,6 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
 
   Iterable<Student> getAllByOrderByStudentName();
 
-  Iterable<Student> getAllByStudentNameContainsOrderByStudentNameAsc(String studentName);
-
   default Student findOrFail(UUID id) {
     return findById(id).get();
   }
