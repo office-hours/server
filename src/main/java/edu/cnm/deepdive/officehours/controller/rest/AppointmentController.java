@@ -90,14 +90,13 @@ public class AppointmentController {
     return appointmentRepository.save(appointment);
   }
 
-  @PutMapping(value = "/{id}/status", consumes = MediaType.APPLICATION_JSON_VALUE,
-      produces = MediaType.APPLICATION_JSON_VALUE)
-  @ResponseStatus(HttpStatus.NO_CONTENT)
-  public Appointment updateStatus(@PathVariable UUID id, @RequestBody Appointment status) {
+  @PutMapping(value = "/{id}/status", consumes = MediaType.TEXT_PLAIN_VALUE,
+      produces = MediaType.TEXT_PLAIN_VALUE)
+  public String updateStatus(@PathVariable UUID id, @RequestBody String status) {
     Appointment appointment = appointmentRepository.findOrFail(id);
-    appointment.setStatus(status.getStatus());
+    appointment.setStatus(Status.valueOf(status.toUpperCase()));
     appointmentRepository.save(appointment);
-    return status;
+    return appointment.getStatus().name();
   }
 
 }
