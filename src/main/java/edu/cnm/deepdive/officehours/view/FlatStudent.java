@@ -5,18 +5,36 @@ import java.net.URI;
 import java.util.UUID;
 import org.springframework.lang.NonNull;
 
-  @JsonPropertyOrder({"id", "student_name", "href"})
+/**
+ *Declares the getters of student for serialization, excluding
+ * references to other objects that could result in stack overflow on serialization.
+ */
+@JsonPropertyOrder({"id", "student_name", "href"})
   public interface FlatStudent {
 
-    @NonNull
+  /**
+   * return the Id (UUID) of a student resource.
+   *
+   * @return student UUID
+   */
+  @NonNull
     UUID getId();
 
+  /**
+   * returns the name of a student
+   *
+   * @return studentName
+   */
+  @NonNull
+  String getStudentName();
 
-    @NonNull
-    String getStudentName();
-
-    @NonNull
-    URI getHref();
+  /**
+   * Returns a URL referring to the teacher resource.
+   *
+   * @return student URL
+   */
+  @NonNull
+  URI getHref();
 
   }
 

@@ -38,6 +38,7 @@ public class User {
   private static EntityLinks entityLinks;
 
 
+  @SuppressWarnings("JpaDataSourceORMInspection")
   @NonNull
   @Id
   @GeneratedValue(generator =  "uuid2")
@@ -126,6 +127,7 @@ public class User {
     entityLinks.toString();
   }
 
+  @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
   @Autowired
   private void setEntityLinks(EntityLinks entityLinks) {
     User.entityLinks = entityLinks;

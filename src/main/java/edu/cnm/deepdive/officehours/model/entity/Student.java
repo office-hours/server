@@ -28,6 +28,7 @@ public class Student implements FlatStudent {
 
   private static EntityLinks entityLinks;
 
+  @SuppressWarnings("JpaDataSourceORMInspection")
   @NonNull
   @Id
   @GeneratedValue(generator = "uuid2")

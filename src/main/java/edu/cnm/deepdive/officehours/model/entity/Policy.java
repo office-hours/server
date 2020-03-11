@@ -27,6 +27,7 @@ import org.springframework.lang.NonNull;
 )
 public class Policy {
 
+    @SuppressWarnings("JpaDataSourceORMInspection")
     @NonNull
     @Id
     @GeneratedValue(generator = "uuid2")

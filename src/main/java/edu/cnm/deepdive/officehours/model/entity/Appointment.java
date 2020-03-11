@@ -45,6 +45,7 @@ public class Appointment implements FlatAppointment {
   private static EntityLinks entityLinks;
 
 
+  @SuppressWarnings("JpaDataSourceORMInspection")
   @NonNull
   @Id
   @GeneratedValue(generator = "uuid2")
