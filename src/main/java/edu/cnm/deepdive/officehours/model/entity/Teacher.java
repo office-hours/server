@@ -2,6 +2,7 @@ package edu.cnm.deepdive.officehours.model.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.officehours.view.FlatAppointment;
+import edu.cnm.deepdive.officehours.view.FlatPolicy;
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
 import java.net.URI;
 import java.util.LinkedList;
@@ -56,9 +57,26 @@ public class Teacher implements FlatTeacher {
   private List<Appointment> appointment = new LinkedList<>();
 
   @NonNull
+  @OneToMany(mappedBy = "teacher",
+      cascade = {
+          CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+      })
+  @JsonSerialize(contentAs = FlatPolicy.class)
+  private List<Policy> policy = new LinkedList<>();
+
+  @NonNull
   @Column( name = "teacher_name", unique = true)
   private String teacherName;
 
+
+  @NonNull
+  public List<Policy> getPolicy() {
+    return policy;
+  }
+
+  public void setPolicy(@NonNull List<Policy> policy) {
+    this.policy = policy;
+  }
 
   @Override
   public UUID getId() {
