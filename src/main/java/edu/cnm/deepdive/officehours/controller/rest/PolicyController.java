@@ -34,7 +34,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/policies")
 @ExposesResourceFor(Policy.class)
-public class PolicyController {
+public class PolicyController{
 
   private final PolicyRepository policyRepository;
   private final TeacherRepository teacherRepository;

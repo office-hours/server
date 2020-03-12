@@ -34,6 +34,11 @@ public class UserController {
    return ResponseEntity.created(user.getHref()).body(user);
  }
 
+  @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+  public Iterable<User> get() {
+    return repository.findAllByOrderById();
+  }
+
  @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
  public User get(@PathVariable UUID id) {
    return repository.findById(id).get();
