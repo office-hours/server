@@ -25,6 +25,9 @@ import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * Defines a database entity and its relationships to {@link Teacher} and {@link Student} entities.
+ */
 @Component
 @Entity
 @Table(
@@ -74,50 +77,83 @@ public class User {
   @JsonSerialize(as = FlatStudent.class)
   private Student student;
 
+  /**
+   * Returns the UUID for the user instance.
+   */
   @NonNull
   public UUID getId() {
     return id;
   }
 
+  /**
+   * Returns the oauth token for the user instance.
+   */
   @NonNull
   public String getOauth() {
     return oauth;
   }
 
+  /**
+   * Sets the oauth token for the user instance.
+   */
   public void setOauth(@NonNull String oauth) {
     this.oauth = oauth;
   }
 
+  /**
+   * Returns the nickname for the user.
+   */
   public String getNickname() {
     return nickname;
   }
 
+  /**
+   * Sets the nickname for the user.
+   */
   public void setNickname(String nickname) {
     this.nickname = nickname;
   }
 
+  /**
+   * Returns the email for the user instance.
+   */
   @NonNull
   public String getEmail() {
     return email;
   }
 
+  /**
+   * Sets the email for the user instance.
+   */
   public void setEmail(@NonNull String email) {
     this.email = email;
   }
 
+  /**
+   * Returns the timestamp when the user was created.
+   */
   @NonNull
   public Date getCreated() {
     return created;
   }
 
+  /**
+   * Returns the {@link Teacher} instance related to the user.
+   */
   public Teacher getTeacher() {
     return teacher;
   }
 
+  /**
+   * Returns the {@link User} instance related to the user.
+   */
   public Student getStudent() {
     return student;
   }
 
+  /**
+   * Returns the URL referencing the user.
+   */
   public URI getHref() {
     return entityLinks.linkForItemResource(User.class, id).toUri();
   }
