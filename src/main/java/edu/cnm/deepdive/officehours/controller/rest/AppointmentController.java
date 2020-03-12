@@ -122,7 +122,7 @@ public class AppointmentController {
   }
 
   /**
-   * Updates the startTime and EndTime of the {@link Appointment} instance, fetched by the provide Id, with the provided parameters.
+   * Updates the startTime and EndTime of the {@link Appointment} instance, fetched by the provided Id, with the provided parameters.
    * @param id UUID of the {@link Appointment} instance.
    * @param modifiedAppointment partial instance of {@link Appointment} which contains the modifications to be made.
    * @return updated {@link Appointment} instance.
