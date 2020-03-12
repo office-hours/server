@@ -29,6 +29,9 @@ import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * Defines a database entity and its relationships to {@link Teacher} and {@link Student} entities.
+ */
 @SuppressWarnings("SpringJavaInjectionPointsAutowiringInspection")
 @Component
 @Entity
@@ -100,74 +103,123 @@ public class Appointment implements FlatAppointment {
   @Column(nullable = false)
   private Date updated;
 
+
+  /**
+   * Sets the {@link Student} instance that is related to the appointment.
+   */
   public void setStudent(@NonNull Student student) {
     this.student = student;
   }
 
+  /**
+   * Sets the {@link Teacher} instance to be related to the appointment.
+   */
   public void setTeacher(@NonNull Teacher teacher) {
     this.teacher = teacher;
   }
 
+  /**
+   * Returns the UUID for the appointment.
+   */
   @NonNull
   public UUID getId() {
     return id;
   }
 
+  /**
+   * Returns the status enum for the appointment.
+   */
   @NonNull
   public Status getStatus() {
     return status;
   }
 
+  /**
+   * Sets the status enum for the appointment.
+   */
   public void setStatus(@NonNull Status status) {
     this.status = status;
   }
 
+  /**
+   * Returns the subject enum for the appointment.
+   */
   public Subject getSubject() {
     return subject;
   }
 
+  /**
+   * Sets the subject enum for the appointment.
+   */
   public void setSubject(Subject subject) {
     this.subject = subject;
   }
 
+  /**
+   * Returns the date the appointment was created.
+   */
   @NonNull
   public Date getCreated() {
     return created;
   }
 
+  /**
+   * Returns the date the appointment was last updated.
+   */
   @NonNull
   public Date getUpdated() {
     return updated;
   }
 
+  /**
+   * Returns the {@link Student} instance that is related to the appointment.
+   */
   @NonNull
   public Student getStudent() {
     return student;
   }
 
+  /**
+   * Returns the {@link Teacher} instance that is related to the appointment.
+   */
   @NonNull
   public Teacher getTeacher() {
     return teacher;
   }
 
+  /**
+   * Returns the start time for the appointment.
+   */
   @NonNull
   public Date getStartTime() {
     return startTime;
   }
 
+  /**
+   * Sets the start time for the appointment.
+   */
   public void setStartTime(@NonNull Date startTime) {
     this.startTime = startTime;
   }
 
+  /**
+   * Returns the end time for the appointment.
+   */
   @NonNull
   public Date getEndTime() {
     return endTime;
   }
 
+  /**
+   * Set the end time for the appointment.
+   */
   public void setEndTime(@NonNull Date endTime) {
     this.endTime = endTime;
   }
 
+  /**
+   * Returns the URL reference for the appointment.
+   */
   public URI getHref() {
     return entityLinks.linkForItemResource(Appointment.class, id).toUri();
   }
@@ -180,6 +232,9 @@ public class Appointment implements FlatAppointment {
     Appointment.entityLinks = entityLinks;
   }
 
+  /**
+   * Nested enum class that defines the status objects valid in the {@link Appointment} entity.
+   */
   public enum Status {
     NO_SHOW("N"),
     PENDING("P"),
@@ -199,6 +254,9 @@ public class Appointment implements FlatAppointment {
     }
   }
 
+  /**
+   * Nested enum class that defines the subject objects valid in the {@link Appointment} entity.
+   */
   public enum Subject {
     ANDROID_PROJECT("A"),
     CAPSTONE_PROJECT("C"),

@@ -28,7 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 /**
  * Designates REST endpoints for http requests on {@link Appointment} entity fields, using
- * {@link AppointmentRepository} methods as the medium.
+ * {@link AppointmentRepository} operations as the medium.
  */
 @RestController
 @RequestMapping("/appointments")
@@ -42,9 +42,9 @@ public class AppointmentController {
   /**
    * Initializes this instance, injecting an instance of {@link AppointmentRepository},
    * {@link TeacherRepository}, and {@link StudentRepository}.
-   * @param appointmentRepository repository used to implement methods on the {@link Appointment} entity.
-   * @param teacherRepository repository used to implement methods on the {@link Teacher} entity.
-   * @param studentRepository repository used to implement methods on the {@link Student} entity.
+   * @param appointmentRepository repository used to implement operations on the {@link Appointment} entity.
+   * @param teacherRepository repository used to implement operations on the {@link Teacher} entity.
+   * @param studentRepository repository used to implement operations on the {@link Student} entity.
    */
   @Autowired
   public AppointmentController(
@@ -74,7 +74,8 @@ public class AppointmentController {
   }
 
   /**
-   *
+   * Returns all of the instances of {@link Appointment} that are on the database order by the
+   * start time
    * @return a list of all instances of {@link Appointment} in the database.
    */
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
@@ -111,7 +112,7 @@ public class AppointmentController {
   }
 
   /**
-   * Returns the instance of {@link Appointment} that are matches the provided Id.
+   * Returns the instance of {@link Appointment} that matches the provided Id.
    * @param id UUID of the {@link Appointment} instance.
    * @return fetched {@link Appointment} instance.
    */
