@@ -76,6 +76,7 @@ public class Policy implements FlatPolicy {
   @Column(nullable = false, updatable = true)
   private Date blockTime;
 
+
   @NonNull
   public Teacher getTeacher() {
     return teacher;
