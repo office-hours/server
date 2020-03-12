@@ -119,7 +119,7 @@ public class User {
   }
 
   public URI getHref() {
-    return entityLinks.linkForItemResource(Teacher.class, id).toUri();
+    return entityLinks.linkForItemResource(User.class, id).toUri();
   }
 
   @PostConstruct

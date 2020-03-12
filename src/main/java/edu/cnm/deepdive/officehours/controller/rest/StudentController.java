@@ -44,7 +44,7 @@ public class StudentController {
 
   @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
   public Student getId(@PathVariable UUID id) {
-    return studentRepository.getOne(id);
+    return studentRepository.findOrFail(id);
   }
 
   @GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)

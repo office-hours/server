@@ -22,6 +22,9 @@ import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * Defines a database entity and its relationships to {@link User} and {@link Appointment} entities.
+ */
 @Component
 @Entity
 public class Student implements FlatStudent {
@@ -60,15 +63,25 @@ public class Student implements FlatStudent {
     return studentName;
   }
 
+  /**
+   * Sets a string student name based on preference.
+   */
   public void setStudentName(@NonNull String studentName) {
     this.studentName = studentName;
   }
 
+  /**
+   * Returns a {@link List} of {@link Appointment} instances related to {@link Student}.
+   */
   @NonNull
   public List<Appointment> getAppointment() {
     return appointment;
   }
 
+  /**
+   * Sets a {@link List} of {@link Appointment} instances by said {@link Student} available by
+   * {@link Teacher}.
+   */
   public void setAppointment(
       @NonNull List<Appointment> appointment) {
     this.appointment = appointment;
@@ -84,6 +97,9 @@ public class Student implements FlatStudent {
     return user;
   }
 
+  /**
+   * Sets {@link User} to {@link Student}.
+   */
   public void setUser(@NonNull User user) {
     this.user = user;
   }
