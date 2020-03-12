@@ -6,34 +6,34 @@ import java.util.UUID;
 import org.springframework.lang.NonNull;
 
 /**
- * Declares the getters of teacher for serialization, excluding
- * references to other objects that could result in stack overflow on serialization.
+ * Declares the getters of teacher for serialization, excluding references to other objects that
+ * could result in stack overflow on serialization.
  */
-@JsonPropertyOrder({"id", "teacher_name","href"})
+@JsonPropertyOrder({"id", "teacher_name", "href"})
 public interface FlatTeacher {
 
-    /**
-     * return the Id (UUID) of a teacher resource.
-     *
-     * @return teacher UUID
-     */
-    @NonNull
-    UUID getId();
+  /**
+   * return the Id (UUID) of a teacher resource.
+   *
+   * @return teacher UUID
+   */
+  @NonNull
+  UUID getId();
 
-    /**
-     * returns the name of a teacher
-     *
-     * @return teacherName
-     */
-    @NonNull
-    String getTeacherName();
+  /**
+   * returns the name of a teacher
+   *
+   * @return teacherName
+   */
+  @NonNull
+  String getTeacherName();
 
-    /**
-     * Returns a URL referring to the teacher resource.
-     *
-     * @return teacher URL
-     */
-    @NonNull
-    URI getHref();
-  }
+  /**
+   * Returns a URL referring to the teacher resource.
+   *
+   * @return teacher URL
+   */
+  @NonNull
+  URI getHref();
+}
 

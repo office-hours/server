@@ -23,7 +23,8 @@ import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
 /**
- * Defines a database entity and its relationships to {@link User} and {@link Appointment} entities.
+ * Defines a database entity and its relationships to {@link User} and {@link Appointment}
+ * entities.
  */
 @Component
 @Entity
@@ -108,10 +109,12 @@ public class Student implements FlatStudent {
   public URI getHref() {
     return entityLinks.linkForItemResource(Student.class, id).toUri();
   }
+
   @PostConstruct
   private void init() {
     entityLinks.toString();
   }
+
   @Autowired
   private void setEntityLinks(EntityLinks entityLinks) {
     Student.entityLinks = entityLinks;

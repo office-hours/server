@@ -43,16 +43,16 @@ public class Teacher implements FlatTeacher {
   @NonNull
   @OneToOne(
       cascade = {CascadeType.DETACH, CascadeType.MERGE,
-          CascadeType.PERSIST, CascadeType.REFRESH }
-      )
+          CascadeType.PERSIST, CascadeType.REFRESH}
+  )
   @JoinColumn(name = "user_id")
   private User user;
 
   @NonNull
   @OneToMany(mappedBy = "teacher",
       cascade = {
-      CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-  })
+          CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
+      })
   @JsonSerialize(contentAs = FlatAppointment.class)
   private List<Appointment> appointment = new LinkedList<>();
 
@@ -65,7 +65,7 @@ public class Teacher implements FlatTeacher {
   private List<Policy> policy = new LinkedList<>();
 
   @NonNull
-  @Column( name = "teacher_name", unique = true)
+  @Column(name = "teacher_name", unique = true)
   private String teacherName;
 
 
@@ -88,19 +88,22 @@ public class Teacher implements FlatTeacher {
     return teacherName;
   }
 
+  public void setTeacherName(@NonNull String teacherName) {
+    this.teacherName = teacherName;
+  }
+
   @Override
   public URI getHref() {
     return entityLinks.linkForItemResource(Teacher.class, id).toUri();
   }
 
-  public void setTeacherName(@NonNull String teacherName) {
-    this.teacherName = teacherName;
-  }
-
-
   @NonNull
   public User getUser() {
     return user;
+  }
+
+  public void setUser(@NonNull User user) {
+    this.user = user;
   }
 
   @NonNull
@@ -113,10 +116,6 @@ public class Teacher implements FlatTeacher {
     this.appointment = appointment;
   }
 
-  public void setUser(@NonNull User user) {
-    this.user = user;
-  }
-
   @Override
   public int hashCode() {
     return Objects.hash(id, teacherName);
@@ -127,7 +126,7 @@ public class Teacher implements FlatTeacher {
     boolean result = false;
     if (obj == this) {
       result = true;
-    } else if (obj instanceof  Teacher && obj.hashCode() == hashCode()){
+    } else if (obj instanceof Teacher && obj.hashCode() == hashCode()) {
       Teacher other = (Teacher) obj;
       result = id.equals(other.id) && teacherName.equals(other.teacherName);
     }

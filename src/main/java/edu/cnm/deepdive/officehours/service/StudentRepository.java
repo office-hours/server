@@ -1,6 +1,5 @@
 package edu.cnm.deepdive.officehours.service;
 
-import edu.cnm.deepdive.officehours.model.entity.Policy;
 import edu.cnm.deepdive.officehours.model.entity.Student;
 import java.util.UUID;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -12,11 +11,14 @@ public interface StudentRepository extends JpaRepository<Student, UUID> {
 
   /**
    * Selects and returns all {@link Student} instances pertaining to and ordered by student names.
+   *
    * @return {@link Iterable} sequence of {@link Student} instances.
    */
   Iterable<Student> getAllByOrderByStudentName();
+
   /**
    * Defaults to finding a {@link Student} id or failing.
+   *
    * @param id for {@link Student}.
    * @return a {@link Student} id.
    */

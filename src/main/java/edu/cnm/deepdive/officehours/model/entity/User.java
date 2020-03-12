@@ -1,7 +1,6 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
-import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
 import java.net.URI;
@@ -44,10 +43,10 @@ public class User {
   @SuppressWarnings("JpaDataSourceORMInspection")
   @NonNull
   @Id
-  @GeneratedValue(generator =  "uuid2")
+  @GeneratedValue(generator = "uuid2")
   @GenericGenerator(name = "uuid2", strategy = "uuid2")
-  @Column( name = "user_id", columnDefinition = "CHAR(16) FOR BIT DATA",
-  nullable = false, updatable = false)
+  @Column(name = "user_id", columnDefinition = "CHAR(16) FOR BIT DATA",
+      nullable = false, updatable = false)
   private UUID id;
 
   @NonNull
@@ -72,7 +71,7 @@ public class User {
   @JsonSerialize(as = FlatTeacher.class)
   private Teacher teacher;
 
-  @OneToOne (mappedBy = "user",
+  @OneToOne(mappedBy = "user",
       cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
   @JsonSerialize(as = FlatStudent.class)
   private Student student;

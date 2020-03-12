@@ -103,21 +103,6 @@ public class Appointment implements FlatAppointment {
   @Column(nullable = false)
   private Date updated;
 
-
-  /**
-   * Sets the {@link Student} instance that is related to the appointment.
-   */
-  public void setStudent(@NonNull Student student) {
-    this.student = student;
-  }
-
-  /**
-   * Sets the {@link Teacher} instance to be related to the appointment.
-   */
-  public void setTeacher(@NonNull Teacher teacher) {
-    this.teacher = teacher;
-  }
-
   /**
    * Returns the UUID for the appointment.
    */
@@ -180,11 +165,25 @@ public class Appointment implements FlatAppointment {
   }
 
   /**
+   * Sets the {@link Student} instance that is related to the appointment.
+   */
+  public void setStudent(@NonNull Student student) {
+    this.student = student;
+  }
+
+  /**
    * Returns the {@link Teacher} instance that is related to the appointment.
    */
   @NonNull
   public Teacher getTeacher() {
     return teacher;
+  }
+
+  /**
+   * Sets the {@link Teacher} instance to be related to the appointment.
+   */
+  public void setTeacher(@NonNull Teacher teacher) {
+    this.teacher = teacher;
   }
 
   /**
@@ -223,10 +222,12 @@ public class Appointment implements FlatAppointment {
   public URI getHref() {
     return entityLinks.linkForItemResource(Appointment.class, id).toUri();
   }
+
   @PostConstruct
   private void init() {
     entityLinks.toString();
   }
+
   @Autowired
   private void setEntityLinks(EntityLinks entityLinks) {
     Appointment.entityLinks = entityLinks;

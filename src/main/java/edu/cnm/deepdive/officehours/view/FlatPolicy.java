@@ -7,6 +7,7 @@ import org.springframework.lang.NonNull;
 
 @JsonPropertyOrder({"id", "created", "updated", "starAvailable", "endAvailable", "blockTime"})
 public interface FlatPolicy {
+
   /**
    * returns the Id (UUID) of a policy resource.
    */
@@ -25,6 +26,7 @@ public interface FlatPolicy {
 
   @NonNull
   Date getUpdated();
+
   /**
    * returns an available start time policy for teacher in appointment.
    */

@@ -6,11 +6,11 @@ import java.util.UUID;
 import org.springframework.lang.NonNull;
 
 /**
- *Declares the getters of student for serialization, excluding
- * references to other objects that could result in stack overflow on serialization.
+ * Declares the getters of student for serialization, excluding references to other objects that
+ * could result in stack overflow on serialization.
  */
 @JsonPropertyOrder({"id", "student_name", "href"})
-  public interface FlatStudent {
+public interface FlatStudent {
 
   /**
    * return the Id (UUID) of a student resource.
@@ -18,7 +18,7 @@ import org.springframework.lang.NonNull;
    * @return student UUID
    */
   @NonNull
-    UUID getId();
+  UUID getId();
 
   /**
    * returns the name of a student
@@ -36,6 +36,6 @@ import org.springframework.lang.NonNull;
   @NonNull
   URI getHref();
 
-  }
+}
 
 

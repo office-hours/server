@@ -24,7 +24,6 @@ import org.springframework.web.bind.annotation.RestController;
  * Designates REST endpoints for http requests on {@link Teacher} entity fields, using {@link
  * TeacherRepository} methods as the medium.
  */
-
 @RestController
 @RequestMapping("/teachers")
 @ExposesResourceFor(Teacher.class)
@@ -76,6 +75,7 @@ public class TeacherController {
 
   /**
    * Returns the instance of {@link Teacher} that are matches the provided Id.
+   *
    * @param id UUID of the {@link Teacher} instance.
    * @return fetched {@link Teacher} instance.
    */
@@ -85,7 +85,9 @@ public class TeacherController {
   }
 
   /**
-   * Updates the Status of the {@link Teacher} instance, fetched by the provide Id, with the provided parameters.
+   * Updates the Status of the {@link Teacher} instance, fetched by the provide Id, with the
+   * provided parameters.
+   *
    * @param id UUID of the {@link Teacher} instance.
    * @return updated {@link Teacher} instance.
    */
@@ -100,6 +102,7 @@ public class TeacherController {
   /**
    * Will be able to get an instances of teacher/teachers that are connected to appointments without
    * returning all of the appointments
+   *
    * @param id referring  to the id of the teacher.
    * @return teachers that have appointments, with out a full appointment.
    */
