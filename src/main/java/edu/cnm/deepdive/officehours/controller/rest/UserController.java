@@ -1,8 +1,10 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
+import edu.cnm.deepdive.officehours.model.entity.Student;
+import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import edu.cnm.deepdive.officehours.model.entity.User;
-import edu.cnm.deepdive.officehours.service.UserRepository;
+import edu.cnm.deepdive.officehours.model.repository.UserRepository;
 import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.server.ExposesResourceFor;
@@ -48,6 +50,16 @@ public class UserController {
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE,
       produces = MediaType.APPLICATION_JSON_VALUE)
   public ResponseEntity<User> post(@RequestBody User user) {
+    Student student = user.getStudent();
+    Teacher teacher = user.getTeacher();
+    if (student != null && teacher != null) {
+      throw new IllegalArgumentException();
+    }
+    if (student != null) {
+      student.setUser(user);
+    } else if (teacher != null) {
+      teacher.setUser(user);
+    }
     repository.save(user);
     return ResponseEntity.created(user.getHref()).body(user);
   }

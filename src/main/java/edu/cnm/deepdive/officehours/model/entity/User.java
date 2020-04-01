@@ -1,5 +1,7 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
@@ -35,6 +37,7 @@ import org.springframework.stereotype.Component;
         @Index(columnList = "created")
     }
 )
+@JsonInclude(Include.NON_NULL)
 public class User {
 
   private static EntityLinks entityLinks;
@@ -143,11 +146,19 @@ public class User {
     return teacher;
   }
 
+  public void setTeacher(Teacher teacher) {
+    this.teacher = teacher;
+  }
+
   /**
    * Returns the {@link User} instance related to the user.
    */
   public Student getStudent() {
     return student;
+  }
+
+  public void setStudent(Student student) {
+    this.student = student;
   }
 
   /**

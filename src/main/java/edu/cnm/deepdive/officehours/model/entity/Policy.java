@@ -20,11 +20,13 @@ import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.UpdateTimestamp;
 import org.springframework.lang.NonNull;
+import org.springframework.stereotype.Component;
 
 /**
  * {@link Policy} database entity with an index of created and it's relationship with one {@link
  * Teacher} to zero or many {@link Policy}.
  */
+@Component
 @Entity
 @Table(
     indexes = {
@@ -43,8 +45,7 @@ public class Policy implements FlatPolicy {
   private UUID id;
 
   @NonNull
-  @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-      CascadeType.PERSIST, CascadeType.REFRESH})
+  @ManyToOne(cascade = {})
   @JoinColumn(name = "teacher_id")
   @JsonSerialize(as = FlatTeacher.class)
   private Teacher teacher;
@@ -72,9 +73,8 @@ public class Policy implements FlatPolicy {
   private Date updated;
 
   @NonNull
-  @Temporal(TemporalType.TIME)
   @Column(nullable = false, updatable = true)
-  private Date blockTime;
+  private int blockTime;
 
   @NonNull
   public Teacher getTeacher() {
@@ -119,7 +119,7 @@ public class Policy implements FlatPolicy {
   }
 
   @NonNull
-  public Date getBlockTime() {
+  public int getBlockTime() {
     return blockTime;
   }
 
@@ -129,7 +129,7 @@ public class Policy implements FlatPolicy {
    *
    * @param blockTime of teachers availability.
    */
-  public void setBlockTime(@NonNull Date blockTime) {
+  public void setBlockTime(@NonNull int blockTime) {
     this.blockTime = blockTime;
   }
 

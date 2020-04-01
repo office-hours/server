@@ -1,0 +1,42 @@
+[
+  {
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startAvailable": "2020-04-13T12:00:00-0600",
+    "endAvailable": "2020-04-13T18:00:00-0600",
+    "blockTime": 60
+  },
+  {
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startAvailable": "2020-04-14T12:00:00-0600",
+    "endAvailable": "2020-04-14T18:00:00-0600",
+    "blockTime": 60
+  },
+  {
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startAvailable": "2020-04-15T12:00:00-0600",
+    "endAvailable": "2020-04-15T18:00:00-0600",
+    "blockTime": 60
+  },
+  {
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startAvailable": "2020-04-16T12:00:00-0600",
+    "endAvailable": "2020-04-16T18:00:00-0600",
+    "blockTime": 60
+  },
+  {
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startAvailable": "2020-04-17T12:00:00-0600",
+    "endAvailable": "2020-04-17T18:00:00-0600",
+    "blockTime": 60
+  }
+]

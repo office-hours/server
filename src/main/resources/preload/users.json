@@ -1,0 +1,123 @@
+[
+  {
+    "nickname": "Yoda",
+    "email": "notyoda@thedarkforcerules.com",
+    "oauth": "0000000000",
+    "teacher":{
+      "teacherName": "Yoda"
+    }
+  },
+  {
+    "nickname": "Johnny Bravo",
+    "email": "heybaby@yeahwhatever.com",
+    "oauth": "0000000002",
+    "teacher":{
+      "teacherName": "Johnny Bravo"
+      }
+
+  },
+  {
+    "nickname": "Rick Sanchez",
+    "email": "wubbalubba@dub.dub",
+    "oauth": "0000000003",
+    "teacher":{
+      "teacherName": "Rick"
+    }
+  },
+  {
+    "nickname": "Professor Farnsworth",
+    "email": "Good@news.everyone",
+    "oauth": "0000000004",
+    "teacher":{
+      "teacherName": "The Professor"
+    }
+  },
+  {
+    "nickname": "Bender B. Rodriguez",
+    "email": "bitemyshinymetal@donkey.now",
+    "oauth": "0000000005",
+    "teacher":{
+      "teacherName": "Bender"
+    }
+  },
+  {
+    "nickname": "Wade Wilson",
+    "email": "theguyintheredsuit@aol.com",
+    "oauth": "0000000006",
+    "teacher":{
+      "teacherName": "Deadpool"
+    }
+  },
+  {
+    "nickname": "Obi-Wan Kenobi",
+    "email": "ob.juan.kenobi@Jedi.gov",
+    "oauth": "0000000007",
+    "student":{
+      "studentName": "Obi-Wan Kenobi"
+    }
+  },
+  {
+    "nickname": "Little Suzy",
+    "email": "littlesuzy@yeahwhatever.com",
+    "oauth": "0000000008",
+    "student":{
+      "studentName": "Little Suzy"
+    }
+  },
+  {
+    "nickname": "Morty Smith",
+    "email": "TheOriginalMorty@dub.dub",
+    "oauth": "0000000009",
+    "student":{
+      "studentName": "Morty"
+    }
+  },
+  {
+    "nickname": "Philip J. Fry",
+    "email": "No@news.everyone",
+    "oauth": "0000000010",
+    "student":{
+      "studentName": "Fry"
+    }
+  },
+  {
+    "nickname": "Robert Dobalina",
+    "email": "theguyinthehydrasuit@Hydra.gov",
+    "oauth": "0000000012",
+    "student":{
+      "studentName": "Bob"
+    }
+  },
+  {
+    "nickname": "Luke Skywalker",
+    "email": "Luke@Jedi.org",
+    "oauth": "0000000013",
+    "student":{
+      "studentName": "Luke Skywalker"
+    }
+  },
+  {
+    "nickname": "Carl Chryniszzswics",
+    "email": "cc@yeahwhatever.com",
+    "oauth": "0000000014",
+    "student":{
+      "studentName": "Carl"
+    }
+  },
+  {
+    "nickname": "Summer Smith",
+    "email": "SummerthenFall@dub.dub",
+    "oauth": "0000000015",
+    "student":{
+      "studentName": "Summer"
+    }
+  },
+  {
+    "nickname": "Cubert J. Farnsworth",
+    "email": "Bad@news.everyone",
+    "oauth": "0000000016",
+    "student":{
+      "studentName": "Cubert"
+    }
+  }
+]

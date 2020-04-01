@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.officehours.service;
+package edu.cnm.deepdive.officehours.model.repository;
 
 import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Appointment.Status;

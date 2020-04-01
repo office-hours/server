@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.officehours.service;
+package edu.cnm.deepdive.officehours.model.repository;
 
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
 import java.util.UUID;
@@ -15,6 +15,8 @@ public interface TeacherRepository extends JpaRepository<Teacher, UUID> {
    * @return {@link Iterable} sequence of {@link Teacher} instances.
    */
   Iterable<Teacher> getAllByOrderByTeacherName();
+
+  Teacher findFirstByTeacherName(String teacherName);
 
   /**
    * Defaults to finding a {@link Teacher} id or failing.

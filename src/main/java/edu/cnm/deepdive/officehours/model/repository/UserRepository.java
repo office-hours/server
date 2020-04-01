@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.officehours.service;
+package edu.cnm.deepdive.officehours.model.repository;
 
 import edu.cnm.deepdive.officehours.model.entity.User;
 import java.util.UUID;
@@ -15,6 +15,8 @@ public interface UserRepository extends JpaRepository<User, UUID> {
    * @return {@link Iterable} sequence of {@link User} instances.
    */
   Iterable<User> findAllByOrderById();
+
+  Iterable<User> findAllByOrderByNickname();
 
   /**
    * Defaults to finding a {@link User} id or failing.

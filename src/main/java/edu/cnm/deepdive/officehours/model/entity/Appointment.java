@@ -58,17 +58,13 @@ public class Appointment implements FlatAppointment {
   private UUID id;
 
   @NonNull
-  @ManyToOne(
-      cascade = {
-          CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-      })
+  @ManyToOne(cascade = {})
   @JoinColumn(name = "student_id")
   @JsonSerialize(as = FlatStudent.class)
   private Student student;
 
   @NonNull
-  @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE,
-      CascadeType.PERSIST, CascadeType.REFRESH})
+  @ManyToOne(cascade = {})
   @JoinColumn(name = "teacher_id")
   @JsonSerialize(as = FlatTeacher.class)
   private Teacher teacher;

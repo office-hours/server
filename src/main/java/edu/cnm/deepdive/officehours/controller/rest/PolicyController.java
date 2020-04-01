@@ -1,13 +1,9 @@
 package edu.cnm.deepdive.officehours.controller.rest;
 
-import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Policy;
-import edu.cnm.deepdive.officehours.model.entity.Student;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
-import edu.cnm.deepdive.officehours.service.AppointmentRepository;
-import edu.cnm.deepdive.officehours.service.PolicyRepository;
-import edu.cnm.deepdive.officehours.service.StudentRepository;
-import edu.cnm.deepdive.officehours.service.TeacherRepository;
+import edu.cnm.deepdive.officehours.model.repository.PolicyRepository;
+import edu.cnm.deepdive.officehours.model.repository.TeacherRepository;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;

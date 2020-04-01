@@ -1,4 +1,4 @@
-package edu.cnm.deepdive.officehours.service;
+package edu.cnm.deepdive.officehours.model.repository;
 
 import edu.cnm.deepdive.officehours.model.entity.Policy;
 import java.util.Date;

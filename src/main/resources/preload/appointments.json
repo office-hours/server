@@ -1,0 +1,91 @@
+[
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Luke Skywalker"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-13T12:00:00-0600",
+    "endTime": "2020-04-13T13:00:00-0600"
+  },
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Obi-Wan Kenobi"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-13T13:00:00-0600",
+    "endTime": "2020-04-13T14:00:00-0600"
+  },
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Morty"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-13T14:00:00-0600",
+    "endTime": "2020-04-13T15:00:00-0600"
+  },
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Fry"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-13T15:00:00-0600",
+    "endTime": "2020-04-13T16:00:00-0600"
+  },
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Bob"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-13T16:00:00-0600",
+    "endTime": "2020-04-13T17:00:00-0600"
+  },
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Cubert"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-13T17:00:00-0600",
+    "endTime": "2020-04-13T18:00:00-0600"
+  },
+
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Luke Skywalker"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-14T12:00:00-0600",
+    "endTime": "2020-04-14T13:00:00-0600"
+  },
+  {
+    "status": "PENDING",
+    "student": {
+      "studentName": "Luke Skywalker"
+    },
+    "teacher": {
+      "teacherName": "Yoda"
+    },
+    "startTime": "2020-04-15T12:00:00-0600",
+    "endTime": "2020-04-15T13:00:00-0600"
+  }
+]

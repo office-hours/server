@@ -43,7 +43,8 @@ public interface FlatPolicy {
 
   /**
    * returns an available block time policy for teacher in appointment.
+   * @return
    */
   @NonNull
-  Date getBlockTime();
+  int getBlockTime();
 }
