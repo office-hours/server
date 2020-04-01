@@ -24,6 +24,10 @@ import org.springframework.hateoas.server.EntityLinks;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
 
+/**
+ * Defines a database entity and REST resource representing the a teacher, and its
+ * relationships to zero or more {@link Appointment} resources.
+ */
 @SuppressWarnings("JpaDataSourceORMInspection")
 @Component
 @Entity
@@ -68,12 +72,20 @@ public class Teacher implements FlatTeacher {
   @Column(name = "teacher_name", unique = true)
   private String teacherName;
 
-
+  /**
+   * returns a {@linklist} of policies for one or many {@link Appointment}.
+   * @return
+   */
   @NonNull
   public List<Policy> getPolicy() {
     return policy;
   }
 
+  /**
+   * Allows a {@link Teacher} to set up an {@link Appointment} with restrictions.
+   *
+   * @param policy the restriction of an {@link Appointment}.
+   */
   public void setPolicy(@NonNull List<Policy> policy) {
     this.policy = policy;
   }
@@ -88,6 +100,10 @@ public class Teacher implements FlatTeacher {
     return teacherName;
   }
 
+  /**
+   * Sets a {@link Teacher} name for an {@link Appointment}.
+   * @param teacherName
+   */
   public void setTeacherName(@NonNull String teacherName) {
     this.teacherName = teacherName;
   }
@@ -97,25 +113,46 @@ public class Teacher implements FlatTeacher {
     return entityLinks.linkForItemResource(Teacher.class, id).toUri();
   }
 
+  /**
+   * returns a {@link User} which is connected to a {@link Teacher} resource.
+   * @return User
+   */
   @NonNull
   public User getUser() {
     return user;
   }
 
+  /**
+   * Sets the context of the {@link User} for a {@link Teacher}.
+   * @param user actual user
+   */
   public void setUser(@NonNull User user) {
     this.user = user;
   }
 
+  /**
+   * returns a {@link List} of {@link Appointment}.
+   * @return Appointments made by {@link Teacher}
+   */
   @NonNull
   public List<Appointment> getAppointment() {
     return appointment;
   }
 
+  /**
+   * Sets a {@link List} of appointments.
+   * @param appointment appointment made by {@link Teacher}
+   */
   public void setAppointment(
       @NonNull List<Appointment> appointment) {
     this.appointment = appointment;
   }
-
+  /**
+   * Computes and returns a hash value computed from {@link #getTeacherName()}.
+   *
+   *
+   * @return hash value.
+   */
   @Override
   public int hashCode() {
     return Objects.hash(id, teacherName);
