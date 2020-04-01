@@ -51,6 +51,7 @@ public class Preloader implements CommandLineRunner {
   public void run(String... args) throws Exception {
     loadUsers();
     loadPolicies();
+    loadAppointment();
   }
 
   private void loadUsers() throws IOException {
@@ -88,7 +89,7 @@ public class Preloader implements CommandLineRunner {
 
 
   private void loadAppointment() throws IOException {
-    ClassPathResource resource = new ClassPathResource(POLICY_DATA);
+    ClassPathResource resource = new ClassPathResource(APPOINTMENT_DATA);
     try (InputStream input = resource.getInputStream()) {
       ObjectMapper mapper = new ObjectMapper();
       Appointment[] appointments = mapper.readValue(input, Appointment[].class);
