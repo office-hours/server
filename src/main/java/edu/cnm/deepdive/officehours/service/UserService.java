@@ -27,6 +27,22 @@ public class UserService {
     this.teacherRepository = teacherRepository;
   }
 
+  public User findOrCreate(String oauth, String nickname, String email) {
+    return userRepository.findFirstByOauth(oauth)
+        .orElseGet(() -> {
+          User user = new User();
+          user.setOauth(oauth);
+          user.setNickname(nickname);
+          user.setEmail(email);
+          // FIXME Shouldn't create teacher automatically.
+          Teacher teacher = new Teacher();
+          teacher.setUser(user);
+          teacher.setTeacherName(nickname);
+          user.setTeacher(teacher);
+          return userRepository.save(user);
+        });
+  }
+
   public User create(User user) {
     user.setStudent(resolveStudent(user.getStudent()));
     user.setTeacher(resolveTeacher(user.getTeacher()));

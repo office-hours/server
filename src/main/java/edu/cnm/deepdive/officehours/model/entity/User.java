@@ -1,10 +1,12 @@
 package edu.cnm.deepdive.officehours.model.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
 import edu.cnm.deepdive.officehours.view.FlatTeacher;
+import edu.cnm.deepdive.officehours.view.FlatUser;
 import java.net.URI;
 import java.util.Date;
 import java.util.UUID;
@@ -38,7 +40,7 @@ import org.springframework.stereotype.Component;
     }
 )
 @JsonInclude(Include.NON_NULL)
-public class User {
+public class User implements FlatUser {
 
   private static EntityLinks entityLinks;
 
@@ -54,6 +56,7 @@ public class User {
 
   @NonNull
   @Column(length = 4696, nullable = false, unique = true)
+  @JsonIgnore
   private String oauth;
 
   @Column(unique = true)
@@ -70,12 +73,12 @@ public class User {
   private Date created;
 
   @OneToOne(mappedBy = "user",
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+      cascade = {CascadeType.ALL})
   @JsonSerialize(as = FlatTeacher.class)
   private Teacher teacher;
 
   @OneToOne(mappedBy = "user",
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+      cascade = {CascadeType.ALL})
   @JsonSerialize(as = FlatStudent.class)
   private Student student;
 

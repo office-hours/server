@@ -4,6 +4,7 @@ import edu.cnm.deepdive.officehours.model.entity.Appointment;
 import edu.cnm.deepdive.officehours.model.entity.Appointment.Status;
 import edu.cnm.deepdive.officehours.model.entity.Student;
 import edu.cnm.deepdive.officehours.model.entity.Teacher;
+import edu.cnm.deepdive.officehours.model.entity.User;
 import edu.cnm.deepdive.officehours.model.repository.AppointmentRepository;
 import edu.cnm.deepdive.officehours.model.repository.StudentRepository;
 import edu.cnm.deepdive.officehours.model.repository.TeacherRepository;
@@ -16,6 +17,7 @@ import org.springframework.format.annotation.DateTimeFormat.ISO;
 import org.springframework.hateoas.server.ExposesResourceFor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -70,11 +72,12 @@ public class AppointmentController {
    */
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-  public Appointment post(@RequestBody Appointment appointment) {
-    Teacher teacher = teacherRepository.findOrFail(appointment.getTeacher().getId());
+  public Appointment post(@RequestBody Appointment appointment, Authentication auth) {
+    Teacher teacher = ((User) auth.getPrincipal()).getTeacher(); // FIXME This is bad
     Student student = studentRepository.findOrFail(appointment.getStudent().getId());
     appointment.setTeacher(teacher);
     appointment.setStudent(student);
+    appointment.setStatus(Status.PENDING);
     appointmentRepository.save(appointment);
     return appointment;
   }

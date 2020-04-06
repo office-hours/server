@@ -9,7 +9,7 @@ import org.springframework.lang.NonNull;
  * Declares the getters of student for serialization, excluding references to other objects that
  * could result in stack overflow on serialization.
  */
-@JsonPropertyOrder({"id", "student_name", "href"})
+@JsonPropertyOrder({"id", "studentName", "href"})
 public interface FlatStudent {
 
   /**

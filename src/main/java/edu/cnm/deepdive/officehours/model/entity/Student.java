@@ -3,6 +3,7 @@ package edu.cnm.deepdive.officehours.model.entity;
 import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import edu.cnm.deepdive.officehours.view.FlatAppointment;
 import edu.cnm.deepdive.officehours.view.FlatStudent;
+import edu.cnm.deepdive.officehours.view.FlatUser;
 import java.net.URI;
 import java.util.LinkedList;
 import java.util.List;
@@ -11,6 +12,7 @@ import javax.annotation.PostConstruct;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
@@ -42,16 +44,14 @@ public class Student implements FlatStudent {
   private UUID id;
 
   @NonNull
-  @OneToOne(
-      cascade = {
-          CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH
-      })
-  @JoinColumn(name = "user_id")
+  @OneToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "user_id", nullable = false, updatable = false)
+  @JsonSerialize(as = FlatUser.class)
   private User user;
 
   @NonNull
   @OneToMany(mappedBy = "student",
-      cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+      cascade = CascadeType.ALL)
   @JsonSerialize(contentAs = FlatAppointment.class)
   private List<Appointment> appointment = new LinkedList<>();
 

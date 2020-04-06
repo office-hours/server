@@ -45,7 +45,7 @@ public class Policy implements FlatPolicy {
   private UUID id;
 
   @NonNull
-  @ManyToOne(cascade = {})
+  @ManyToOne()
   @JoinColumn(name = "teacher_id")
   @JsonSerialize(as = FlatTeacher.class)
   private Teacher teacher;

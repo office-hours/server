@@ -12,7 +12,7 @@ import org.springframework.lang.NonNull;
  * Declares the getters of appointment for serialization, excluding references to other objects that
  * could result in stack overflow on serialization.
  */
-@JsonPropertyOrder({"id", "created", "updated", "status", "subject", "starTime", "endTime", "href"})
+@JsonPropertyOrder({"id", "created", "updated", "status", "subject", "startTime", "endTime", "href"})
 public interface FlatAppointment {
 
   /**

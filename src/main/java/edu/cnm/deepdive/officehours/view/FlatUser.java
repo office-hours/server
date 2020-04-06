@@ -9,8 +9,8 @@ import org.springframework.lang.NonNull;
  * Declares the getters of teacher for serialization, excluding references to other objects that
  * could result in stack overflow on serialization.
  */
-@JsonPropertyOrder({"id", "teacherName", "href"})
-public interface FlatTeacher {
+@JsonPropertyOrder({"id", "nickname", "href"})
+public interface FlatUser {
 
   /**
    * return the Id (UUID) of a teacher resource.
@@ -26,7 +26,7 @@ public interface FlatTeacher {
    * @return teacherName
    */
   @NonNull
-  String getTeacherName();
+  String getNickname();
 
   /**
    * Returns a URL referring to the teacher resource.
